@@ -109,7 +109,7 @@ function AnimatedParticles() {
 function FloatingContactIcon() {
   return (
     <motion.div
-      className="fixed bottom-8 right-8 z-50"
+      className="fixed bottom-8 right-8 z-50 sm:bottom-8 sm:right-8"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 2, duration: 0.5 }}
@@ -198,7 +198,7 @@ export default function Hero() {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="mt-12 flex justify-center"
           initial={{ opacity: 0 }}
           animate={isLoaded ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 1.5 }}
