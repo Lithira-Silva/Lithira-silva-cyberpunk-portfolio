@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://johndoe.dev
+
+# Sitemaps
+Sitemap: https://johndoe.dev/sitemap.xml

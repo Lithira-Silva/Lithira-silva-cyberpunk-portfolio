@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-black text-white font-mono antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    line-height: 1.6;
+    letter-spacing: 0.025em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron font-bold;
+    letter-spacing: 0.025em;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-cyan-400 text-black;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-cyan-400;
+  }
+
+  /* Focus outline for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-cyan-400 outline-offset-2;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-24;
+  }
+
+  .container-max {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #00FFFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-button {
+    @apply relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white bg-transparent border border-cyan-400 rounded-lg transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:scale-105;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  }
+
+  .glow-button:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+  }
+
+  .particle {
+    @apply absolute w-1 h-1 bg-cyan-400 rounded-full opacity-60;
+    animation: particle 15s linear infinite;
+  }
+
+  .grid-overlay {
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .tech-badge {
+    @apply inline-flex items-center px-3 py-1 text-xs font-mono bg-gray-800 text-cyan-400 border border-gray-700 rounded-full transition-all duration-300 hover:bg-cyan-400 hover:text-black;
+  }
+
+  .project-card {
+    @apply relative overflow-hidden bg-gray-900 border border-gray-700 rounded-lg transition-all duration-500 hover:border-cyan-400 hover:scale-105;
+  }
+
+  .social-icon {
+    @apply w-12 h-12 flex items-center justify-center text-white border border-gray-700 rounded-full transition-all duration-300 hover:border-cyan-400 hover:text-cyan-400 hover:scale-110;
+  }
+
+  .progress-ring {
+    @apply transition-all duration-1000 ease-out;
+    transform-origin: center;
+  }
+}
+
+@layer utilities {
+  .animate-delay-100 {
+    animation-delay: 0.1s;
+  }
+  
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  .animate-delay-300 {
+    animation-delay: 0.3s;
+  }
+  
+  .animate-delay-400 {
+    animation-delay: 0.4s;
+  }
+  
+  .animate-delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  .text-shadow-glow {
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
