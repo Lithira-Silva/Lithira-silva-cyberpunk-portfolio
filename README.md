@@ -51,7 +51,7 @@ A cutting-edge portfolio website built with the latest 2025 web technologies, sh
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/lithirasilva/portfolio.git
+   git clone https://github.com/Lithira-Silva/portfolio.git
    cd portfolio
    ```
 
@@ -296,7 +296,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Website**: [lithirasilva.dev](https://lithirasilva.dev)
 - **Email**: lithira@example.com
 - **LinkedIn**: [linkedin.com/in/lithirasilva](https://linkedin.com/in/lithirasilva)
-- **GitHub**: [github.com/lithirasilva](https://github.com/lithirasilva)
+- **GitHub**: [github.com/Lithira-Silva](https://github.com/Lithira-Silva)
 - **Twitter**: [@lithirasilva](https://twitter.com/lithirasilva)
 
 ---

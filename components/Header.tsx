@@ -7,13 +7,13 @@ import { Menu, X, Github, Linkedin, Mail, Download, FileText } from 'lucide-reac
 const navigation = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
+  { name: 'Projects', href: '/projects' },
   { name: 'Skills', href: '#skills' },
   { name: 'Contact', href: '#contact' },
 ]
 
 const socialLinks = [
-  { name: 'GitHub', href: 'https://github.com/lithirasilva', icon: Github },
+  { name: 'GitHub', href: 'https://github.com/Lithira-Silva', icon: Github },
   { name: 'LinkedIn', href: 'https://linkedin.com/in/lithirasilva', icon: Linkedin },
   { name: 'Email', href: 'mailto:lithira@example.com', icon: Mail },
 ]
@@ -32,10 +32,15 @@ export default function Header() {
   }, [])
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsOpen(false)
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+        setIsOpen(false)
+      }
+    } else {
+      // For page routes, use window.location
+      window.location.href = href
     }
   }
 

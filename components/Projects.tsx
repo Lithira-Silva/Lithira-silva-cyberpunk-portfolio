@@ -19,8 +19,9 @@ const projects = [
     },
     links: {
       live: 'https://demo.example.com',
-      github: 'https://github.com/lithirasilva/ai-ecommerce'
-    }
+      github: 'https://github.com/Lithira-Silva/ai-ecommerce'
+    },
+    featured: true
   },
   {
     id: 2,
@@ -35,8 +36,9 @@ const projects = [
     },
     links: {
       live: 'https://fraud-demo.example.com',
-      github: 'https://github.com/lithirasilva/fraud-detection'
-    }
+      github: 'https://github.com/Lithira-Silva/fraud-detection'
+    },
+    featured: true
   },
   {
     id: 3,
@@ -51,8 +53,9 @@ const projects = [
     },
     links: {
       live: 'https://cms-demo.example.com',
-      github: 'https://github.com/lithirasilva/ai-cms'
-    }
+      github: 'https://github.com/Lithira-Silva/ai-cms'
+    },
+    featured: true
   },
   {
     id: 4,
@@ -67,8 +70,9 @@ const projects = [
     },
     links: {
       live: 'https://analytics-demo.example.com',
-      github: 'https://github.com/lithirasilva/predictive-dashboard'
-    }
+      github: 'https://github.com/Lithira-Silva/predictive-dashboard'
+    },
+    featured: false
   },
   {
     id: 5,
@@ -83,8 +87,9 @@ const projects = [
     },
     links: {
       live: 'https://trading-demo.example.com',
-      github: 'https://github.com/lithirasilva/neural-trading'
-    }
+      github: 'https://github.com/Lithira-Silva/neural-trading'
+    },
+    featured: false
   },
   {
     id: 6,
@@ -99,10 +104,14 @@ const projects = [
     },
     links: {
       live: 'https://iot-demo.example.com',
-      github: 'https://github.com/lithirasilva/smart-city'
-    }
+      github: 'https://github.com/Lithira-Silva/smart-city'
+    },
+    featured: false
   }
 ]
+
+// Get only featured projects for homepage
+const featuredProjects = projects.filter(project => project.featured)
 
 interface ProjectCardProps {
   project: typeof projects[0]
@@ -248,7 +257,7 @@ export default function Projects() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {featuredProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
@@ -257,6 +266,38 @@ export default function Projects() {
             />
           ))}
         </div>
+
+        {/* View All Projects Button */}
+        <motion.div
+          className="text-center mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <a
+            href="/projects"
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white bg-transparent border-2 border-cyan-400 rounded-lg transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black"
+            style={{
+              boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)',
+            }}
+          >
+            <span className="mr-2">View All Projects</span>
+            <motion.div
+              className="flex items-center"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <ExternalLink size={20} />
+            </motion.div>
+            <div
+              className="absolute inset-0 rounded-lg bg-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+              aria-hidden="true"
+            />
+          </a>
+          <p className="text-gray-400 font-mono text-sm mt-4">
+            Explore {projects.length - featuredProjects.length}+ more innovative projects
+          </p>
+        </motion.div>
 
         {/* Call to Action */}
         <motion.div
@@ -269,13 +310,13 @@ export default function Projects() {
             Want to see more projects or collaborate on something amazing?
           </p>
           <a
-            href="https://github.com/lithirasilva"
+            href="https://github.com/Lithira-Silva"
             target="_blank"
             rel="noopener noreferrer"
             className="glow-button"
           >
             <Github className="mr-2" size={20} />
-            View All Projects
+            View GitHub Profile
           </a>
         </motion.div>
       </div>

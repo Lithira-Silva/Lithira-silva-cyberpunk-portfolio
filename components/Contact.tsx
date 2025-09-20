@@ -55,7 +55,7 @@ const socialLinks = [
   {
     name: 'GitHub',
     icon: Github,
-    url: 'https://github.com/lithirasilva',
+    url: 'https://github.com/Lithira-Silva',
     color: '#ffffff'
   },
   {

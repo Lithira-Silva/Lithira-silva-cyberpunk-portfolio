@@ -105,7 +105,7 @@ export default function RootLayout({
               description: 'Full-Stack AI Engineer crafting intelligent systems that scale',
               url: 'https://lithirasilva.dev',
               sameAs: [
-                'https://github.com/lithirasilva',
+                'https://github.com/Lithira-Silva',
                 'https://linkedin.com/in/lithirasilva',
                 'https://twitter.com/lithirasilva',
               ],
