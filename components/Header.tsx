@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Github, Linkedin, Mail, ExternalLink } from 'lucide-react'
+import { Menu, X, Github, Linkedin, Mail, Download, FileText } from 'lucide-react'
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -37,6 +37,17 @@ export default function Header() {
       element.scrollIntoView({ behavior: 'smooth' })
       setIsOpen(false)
     }
+  }
+
+  const handleDownloadResume = () => {
+    // Create a link to download the resume
+    const link = document.createElement('a')
+    link.href = '/resume/Lithira-Silva-Resume.pdf' // You'll need to add your resume PDF to public/resume/
+    link.download = 'Lithira-Silva-Resume.pdf'
+    link.target = '_blank'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 
   return (
@@ -96,8 +107,27 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Social Links - Desktop */}
+          {/* Social Links & Resume - Desktop */}
           <div className="hidden lg:flex items-center space-x-4">
+            {/* Download Resume Button */}
+            <motion.button
+              onClick={handleDownloadResume}
+              className="group relative inline-flex items-center justify-center px-4 py-2 font-mono font-medium text-sm text-white bg-transparent border border-cyan-400 rounded-lg transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black mr-2"
+              style={{
+                boxShadow: '0 0 10px rgba(0, 255, 255, 0.2)',
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: '0 0 20px rgba(0, 255, 255, 0.4)'
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Download size={16} className="mr-2" />
+              Resume
+              <div className="absolute inset-0 rounded-lg bg-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+            </motion.button>
+
+            {/* Social Links */}
             {socialLinks.map((link) => (
               <motion.a
                 key={link.name}
@@ -150,6 +180,20 @@ export default function Header() {
                     {item.name}
                   </motion.button>
                 ))}
+                
+                {/* Mobile Resume Button */}
+                <motion.button
+                  onClick={handleDownloadResume}
+                  className="w-full flex items-center justify-center px-3 py-3 font-mono text-base text-white bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-md hover:from-cyan-500 hover:to-cyan-600 transition-all duration-300 mt-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: navigation.length * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Download size={18} className="mr-2" />
+                  Download Resume
+                </motion.button>
                 
                 {/* Mobile Social Links */}
                 <div className="flex items-center justify-center space-x-6 pt-4 border-t border-cyan-400/10">
