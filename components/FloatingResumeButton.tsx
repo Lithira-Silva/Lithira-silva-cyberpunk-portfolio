@@ -29,21 +29,34 @@ export default function FloatingResumeButton() {
         onClick={handleDownloadResume}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="group relative flex items-center bg-black/80 backdrop-blur-md border border-cyan-400/30 rounded-full transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-400/10"
+        className="group relative flex items-center rounded-full transition-all duration-300 hover:scale-105 overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.8) 100%)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          border: '1px solid rgba(0, 255, 255, 0.3)',
+          boxShadow: '0 8px 32px rgba(0, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+        }}
         whileHover={{ scale: 1.05, x: 10 }}
         whileTap={{ scale: 0.95 }}
-        style={{
-          boxShadow: '0 0 20px rgba(0, 255, 255, 0.1)',
-        }}
       >
         {/* Icon Container */}
-        <div className="w-14 h-14 flex items-center justify-center">
+        <div className="w-14 h-14 flex items-center justify-center relative">
           <motion.div
             animate={{ rotate: isHovered ? 360 : 0 }}
             transition={{ duration: 0.5 }}
+            className="relative z-10"
           >
             <FileText size={24} className="text-cyan-400" />
           </motion.div>
+          {/* Glass reflection on icon */}
+          <div 
+            className="absolute inset-2 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-full"
+            style={{
+              backdropFilter: 'blur(2px)',
+              WebkitBackdropFilter: 'blur(2px)'
+            }}
+          />
         </div>
 
         {/* Expandable Text */}
@@ -52,12 +65,27 @@ export default function FloatingResumeButton() {
           initial={{ width: 0 }}
           animate={{ width: isHovered ? 'auto' : 0 }}
           transition={{ duration: 0.3 }}
+          style={{
+            background: isHovered ? 'linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.7) 100%)' : 'transparent',
+            backdropFilter: isHovered ? 'blur(15px)' : 'none',
+            WebkitBackdropFilter: isHovered ? 'blur(15px)' : 'none'
+          }}
         >
           <div className="px-4 py-2 flex items-center">
-            <span className="font-mono text-sm text-white mr-2">
+            <span className="font-mono text-sm text-white mr-2 relative z-10">
               Download Resume
             </span>
-            <Download size={16} className="text-cyan-400" />
+            <Download size={16} className="text-cyan-400 relative z-10" />
+            {/* Glass overlay for text area */}
+            {isHovered && (
+              <div 
+                className="absolute inset-0 bg-gradient-to-r from-white/5 to-cyan-400/10"
+                style={{
+                  backdropFilter: 'blur(5px)',
+                  WebkitBackdropFilter: 'blur(5px)'
+                }}
+              />
+            )}
           </div>
         </motion.div>
 

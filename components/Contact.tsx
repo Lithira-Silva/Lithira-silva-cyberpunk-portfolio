@@ -139,9 +139,16 @@ function ContactForm() {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className={`w-full px-4 py-3 bg-transparent border rounded-lg font-mono text-white placeholder-gray-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent ${
-            errors.name ? 'border-red-500' : 'border-gray-700 hover:border-gray-600'
+          className={`w-full px-4 py-3 rounded-lg font-mono text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent ${
+            errors.name ? 'border-red-500' : ''
           }`}
+          style={{
+            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(10, 10, 10, 0.6) 100%)',
+            backdropFilter: 'blur(12px) saturate(120%)',
+            WebkitBackdropFilter: 'blur(12px) saturate(120%)',
+            border: errors.name ? '1px solid #ef4444' : '1px solid rgba(115, 115, 115, 0.3)',
+            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+          }}
           placeholder="Your full name"
           disabled={status.type === 'loading'}
         />
@@ -161,9 +168,16 @@ function ContactForm() {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className={`w-full px-4 py-3 bg-transparent border rounded-lg font-mono text-white placeholder-gray-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent ${
-            errors.email ? 'border-red-500' : 'border-gray-700 hover:border-gray-600'
+          className={`w-full px-4 py-3 rounded-lg font-mono text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent ${
+            errors.email ? 'border-red-500' : ''
           }`}
+          style={{
+            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(10, 10, 10, 0.6) 100%)',
+            backdropFilter: 'blur(12px) saturate(120%)',
+            WebkitBackdropFilter: 'blur(12px) saturate(120%)',
+            border: errors.email ? '1px solid #ef4444' : '1px solid rgba(115, 115, 115, 0.3)',
+            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+          }}
           placeholder="your.email@example.com"
           disabled={status.type === 'loading'}
         />
@@ -183,9 +197,16 @@ function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           rows={6}
-          className={`w-full px-4 py-3 bg-transparent border rounded-lg font-mono text-white placeholder-gray-500 transition-colors duration-300 resize-none focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent ${
-            errors.message ? 'border-red-500' : 'border-gray-700 hover:border-gray-600'
+          className={`w-full px-4 py-3 rounded-lg font-mono text-white placeholder-gray-500 transition-all duration-300 resize-none focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent ${
+            errors.message ? 'border-red-500' : ''
           }`}
+          style={{
+            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(10, 10, 10, 0.6) 100%)',
+            backdropFilter: 'blur(12px) saturate(120%)',
+            WebkitBackdropFilter: 'blur(12px) saturate(120%)',
+            border: errors.message ? '1px solid #ef4444' : '1px solid rgba(115, 115, 115, 0.3)',
+            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+          }}
           placeholder="Tell me about your project or say hello..."
           disabled={status.type === 'loading'}
         />
@@ -360,7 +381,16 @@ export default function Contact() {
             </div>
 
             {/* Quick Stats */}
-            <div className="bg-gray-900/50 border border-gray-700 rounded-lg p-6">
+            <div 
+              className="rounded-lg p-6"
+              style={{
+                background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.8) 0%, rgba(0, 255, 255, 0.06) 40%, rgba(15, 15, 15, 0.85) 100%)',
+                backdropFilter: 'blur(16px) saturate(140%)',
+                WebkitBackdropFilter: 'blur(16px) saturate(140%)',
+                border: '1px solid rgba(115, 115, 115, 0.3)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+              }}
+            >
               <h4 className="font-orbitron font-bold text-lg text-white mb-4">
                 Quick Stats
               </h4>

@@ -118,7 +118,14 @@ function SkillOrb({ skill, index, isVisible }: { skill: Skill; index: number; is
 
         {/* Tooltip */}
         <motion.div
-          className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-3 py-2 bg-black border border-gray-700 rounded-lg pointer-events-none"
+          className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-3 py-2 rounded-lg pointer-events-none"
+          style={{
+            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 255, 255, 0.08) 50%, rgba(10, 10, 10, 0.9) 100%)',
+            backdropFilter: 'blur(12px) saturate(120%)',
+            WebkitBackdropFilter: 'blur(12px) saturate(120%)',
+            border: '1px solid rgba(115, 115, 115, 0.3)',
+            boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+          }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
           transition={{ duration: 0.3 }}

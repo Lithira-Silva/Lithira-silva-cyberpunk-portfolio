@@ -7,7 +7,7 @@ import { Menu, X, Github, Linkedin, Mail, Download, FileText } from 'lucide-reac
 const navigation = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
-  { name: 'Projects', href: '/projects' },
+  { name: 'Projects', href: '#projects' },
   { name: 'Skills', href: '#skills' },
   { name: 'Contact', href: '#contact' },
 ]
@@ -33,11 +33,18 @@ export default function Header() {
 
   const scrollToSection = (href: string) => {
     if (href.startsWith('#')) {
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-        setIsOpen(false)
+      // Check if we're on the homepage first
+      if (window.location.pathname !== '/') {
+        // If not on homepage, navigate to homepage with hash
+        window.location.href = '/' + href
+      } else {
+        // If on homepage, scroll to section
+        const element = document.querySelector(href)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
       }
+      setIsOpen(false)
     } else {
       // For page routes, use window.location
       window.location.href = href
@@ -57,14 +64,24 @@ export default function Header() {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? 'bg-black/90 backdrop-blur-md border-b border-cyan-400/20' 
-          : 'bg-transparent'
+          ? 'bg-black/20 backdrop-blur-xl border-b border-cyan-400/30 shadow-lg shadow-cyan-400/10' 
+          : 'bg-black/10 backdrop-blur-md'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
+      style={{
+        backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'blur(10px) saturate(120%)',
+        WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'blur(10px) saturate(120%)',
+        background: scrolled 
+          ? 'linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.4) 100%)'
+          : 'linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.2) 100%)',
+        boxShadow: scrolled 
+          ? '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+          : '0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+      }}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 lg:h-16">
@@ -79,8 +96,18 @@ export default function Header() {
               className="group flex items-center space-x-2"
             >
               <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-lg flex items-center justify-center">
-                  <span className="font-orbitron font-black text-black text-lg">LS</span>
+                <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-lg flex items-center justify-center relative overflow-hidden">
+                  <span className="font-orbitron font-black text-black text-lg relative z-10">LS</span>
+                  {/* Glass overlay */}
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent"
+                    style={{
+                      backdropFilter: 'blur(1px)',
+                      WebkitBackdropFilter: 'blur(1px)'
+                    }}
+                  />
+                  {/* Highlight */}
+                  <div className="absolute top-1 left-1 w-3 h-3 bg-white/30 rounded-full blur-sm" />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-lg blur-md opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
               </div>
@@ -99,13 +126,23 @@ export default function Header() {
                 <motion.button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="relative font-mono text-sm text-gray-300 hover:text-cyan-400 transition-colors duration-300 group"
+                  className="relative font-mono text-sm text-gray-300 hover:text-cyan-400 transition-all duration-300 group px-3 py-2 rounded-lg"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
                 >
-                  {item.name}
+                  {/* Glass background on hover */}
+                  <div 
+                    className="absolute inset-0 bg-white/5 backdrop-blur-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    style={{
+                      backdropFilter: 'blur(10px)',
+                      WebkitBackdropFilter: 'blur(10px)',
+                      background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                      boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                    }}
+                  />
+                  <span className="relative z-10">{item.name}</span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-cyan-500 group-hover:w-full transition-all duration-300"></div>
                 </motion.button>
               ))}
@@ -117,19 +154,31 @@ export default function Header() {
             {/* Download Resume Button */}
             <motion.button
               onClick={handleDownloadResume}
-              className="group relative inline-flex items-center justify-center px-4 py-2 font-mono font-medium text-sm text-white bg-transparent border border-cyan-400 rounded-lg transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black mr-2"
+              className="group relative inline-flex items-center justify-center px-4 py-2 font-mono font-medium text-sm text-white border border-cyan-400/50 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black mr-2 overflow-hidden"
               style={{
-                boxShadow: '0 0 10px rgba(0, 255, 255, 0.2)',
+                background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 255, 255, 0.05) 100%)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                boxShadow: '0 0 20px rgba(0, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
               }}
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: '0 0 20px rgba(0, 255, 255, 0.4)'
+                boxShadow: '0 0 30px rgba(0, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
               }}
               whileTap={{ scale: 0.95 }}
             >
-              <Download size={16} className="mr-2" />
-              Resume
-              <div className="absolute inset-0 rounded-lg bg-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+              <Download size={16} className="mr-2 relative z-10" />
+              <span className="relative z-10">Resume</span>
+              {/* Hover glass effect */}
+              <div 
+                className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  backdropFilter: 'blur(5px)',
+                  WebkitBackdropFilter: 'blur(5px)'
+                }}
+              />
+              {/* Glass shine effect */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
             </motion.button>
 
             {/* Social Links */}
@@ -166,11 +215,17 @@ export default function Header() {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="md:hidden"
+              className="md:hidden bg-black/30 backdrop-blur-xl border-t border-cyan-400/20"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
+              style={{
+                backdropFilter: 'blur(20px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.6) 100%)',
+                boxShadow: 'inset 0 1px 0 rgba(0, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.4)'
+              }}
             >
               <div className="px-2 pt-2 pb-3 space-y-1 border-t border-cyan-400/20">
                 {navigation.map((item, index) => (

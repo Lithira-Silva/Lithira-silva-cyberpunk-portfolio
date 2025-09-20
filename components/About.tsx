@@ -73,7 +73,14 @@ function AnimatedTimeline() {
           <motion.div
             key={index}
             data-index={index}
-            className="flex-shrink-0 w-80 bg-gray-900 border border-gray-700 rounded-lg p-6 relative"
+            className="flex-shrink-0 w-80 rounded-lg p-6 relative transition-all duration-300 hover:scale-105"
+            style={{
+              background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.8) 0%, rgba(0, 255, 255, 0.06) 30%, rgba(15, 15, 15, 0.85) 100%)',
+              backdropFilter: 'blur(15px) saturate(140%)',
+              WebkitBackdropFilter: 'blur(15px) saturate(140%)',
+              border: '1px solid rgba(115, 115, 115, 0.3)',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+            }}
             initial={{ opacity: 0, y: 50 }}
             animate={visibleItems.includes(index) ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: index * 0.2 }}

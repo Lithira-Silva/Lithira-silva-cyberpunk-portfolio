@@ -186,10 +186,28 @@ function FloatingContactIcon() {
           const contactSection = document.getElementById('contact')
           contactSection?.scrollIntoView({ behavior: 'smooth' })
         }}
-        className="w-14 h-14 bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-full flex items-center justify-center text-black shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
+        className="w-14 h-14 rounded-full flex items-center justify-center text-black shadow-lg transition-all duration-300 relative overflow-hidden group"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.9) 0%, rgba(0, 229, 255, 0.8) 100%)',
+          backdropFilter: 'blur(10px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(10px) saturate(150%)',
+          boxShadow: '0 8px 32px rgba(0, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.1)'
+        }}
         aria-label="Contact me"
       >
-        <Mail size={24} />
+        <Mail size={24} className="relative z-10" />
+        {/* Glass reflection */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent rounded-full"
+          style={{
+            backdropFilter: 'blur(2px)',
+            WebkitBackdropFilter: 'blur(2px)'
+          }}
+        />
+        {/* Shine effect */}
+        <div className="absolute top-2 left-2 w-4 h-4 bg-white/40 rounded-full blur-sm" />
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </button>
     </motion.div>
   )
@@ -242,22 +260,34 @@ export default function Hero() {
         >
           <button
             onClick={scrollToProjects}
-            className="group relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white bg-transparent border-2 border-cyan-400 rounded-lg transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black"
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white border-2 border-cyan-400/50 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black overflow-hidden"
             style={{
-              boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)',
+              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 255, 255, 0.1) 100%)',
+              backdropFilter: 'blur(15px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(15px) saturate(180%)',
+              boxShadow: '0 0 30px rgba(0, 255, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 255, 255, 0.1)'
             }}
           >
-            <span className="mr-2">View Projects</span>
+            <span className="mr-2 relative z-10">View Projects</span>
             <motion.div
               animate={{ y: [0, 4, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
+              className="relative z-10"
             >
               <ChevronDown size={20} />
             </motion.div>
+            {/* Hover glass effect */}
             <div
-              className="absolute inset-0 rounded-lg bg-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-              aria-hidden="true"
+              className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/30 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-all duration-300"
+              style={{
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)'
+              }}
             />
+            {/* Glass shine effect */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-60" />
+            {/* Bottom glow */}
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
           </button>
         </motion.div>
 

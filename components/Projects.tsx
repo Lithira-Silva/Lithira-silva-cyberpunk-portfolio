@@ -124,12 +124,21 @@ function ProjectCard({ project, index, isVisible }: ProjectCardProps) {
 
   return (
     <motion.div
-      className="project-card group h-full"
+      className="group h-full overflow-hidden rounded-xl transition-all duration-500 hover:scale-105"
       initial={{ opacity: 0, y: 50 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
+      style={{
+        background: 'linear-gradient(135deg, rgba(20, 20, 20, 0.85) 0%, rgba(0, 255, 255, 0.08) 30%, rgba(10, 10, 10, 0.9) 100%)',
+        backdropFilter: 'blur(18px) saturate(160%)',
+        WebkitBackdropFilter: 'blur(18px) saturate(160%)',
+        border: isHovered ? '1px solid rgba(0, 255, 255, 0.5)' : '1px solid rgba(115, 115, 115, 0.25)',
+        boxShadow: isHovered 
+          ? '0 25px 50px rgba(0, 255, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 40px rgba(0, 255, 255, 0.1)' 
+          : '0 15px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+      }}
     >
       {/* Project Image */}
       <div className="relative h-48 overflow-hidden">
@@ -161,8 +170,15 @@ function ProjectCard({ project, index, isVisible }: ProjectCardProps) {
             href={project.links.live}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 bg-black/80 rounded-full flex items-center justify-center text-cyan-400 hover:bg-cyan-400 hover:text-black transition-colors duration-300"
+            className="w-10 h-10 rounded-full flex items-center justify-center text-cyan-400 transition-all duration-300 hover:scale-110"
             aria-label={`View ${project.title} live demo`}
+            style={{
+              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.8) 100%)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(0, 255, 255, 0.3)',
+              boxShadow: '0 4px 15px rgba(0, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
           >
             <ExternalLink size={18} />
           </a>
@@ -170,8 +186,15 @@ function ProjectCard({ project, index, isVisible }: ProjectCardProps) {
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 bg-black/80 rounded-full flex items-center justify-center text-cyan-400 hover:bg-cyan-400 hover:text-black transition-colors duration-300"
+            className="w-10 h-10 rounded-full flex items-center justify-center text-cyan-400 transition-all duration-300 hover:scale-110"
             aria-label={`View ${project.title} source code`}
+            style={{
+              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.8) 100%)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(0, 255, 255, 0.3)',
+              boxShadow: '0 4px 15px rgba(0, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
           >
             <Github size={18} />
           </a>
@@ -276,23 +299,33 @@ export default function Projects() {
         >
           <a
             href="/projects"
-            className="group relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white bg-transparent border-2 border-cyan-400 rounded-lg transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black"
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white border-2 border-cyan-400/50 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black overflow-hidden"
             style={{
-              boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)',
+              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 255, 255, 0.08) 100%)',
+              backdropFilter: 'blur(20px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              boxShadow: '0 0 40px rgba(0, 255, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
             }}
           >
-            <span className="mr-2">View All Projects</span>
+            <span className="mr-2 relative z-10">View All Projects</span>
             <motion.div
-              className="flex items-center"
+              className="flex items-center relative z-10"
               animate={{ x: [0, 4, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
               <ExternalLink size={20} />
             </motion.div>
+            {/* Glass hover effect */}
             <div
-              className="absolute inset-0 rounded-lg bg-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-              aria-hidden="true"
+              className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/25 to-cyan-500/15 opacity-0 group-hover:opacity-100 transition-all duration-300"
+              style={{
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)'
+              }}
             />
+            {/* Shine effects */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400/70 to-transparent" />
           </a>
           <p className="text-gray-400 font-mono text-sm mt-4">
             Explore {projects.length - featuredProjects.length}+ more innovative projects
@@ -313,10 +346,28 @@ export default function Projects() {
             href="https://github.com/Lithira-Silva"
             target="_blank"
             rel="noopener noreferrer"
-            className="glow-button"
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white border-2 border-cyan-400/60 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.18) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 255, 255, 0.12) 100%)',
+              backdropFilter: 'blur(25px) saturate(200%)',
+              WebkitBackdropFilter: 'blur(25px) saturate(200%)',
+              boxShadow: '0 0 50px rgba(0, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 255, 255, 0.1)'
+            }}
           >
-            <Github className="mr-2" size={20} />
-            View GitHub Profile
+            <Github className="mr-2 relative z-10" size={20} />
+            <span className="relative z-10">View GitHub Profile</span>
+            {/* Premium glass hover effect */}
+            <div
+              className="absolute inset-0 rounded-lg bg-gradient-to-br from-cyan-400/30 via-white/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-all duration-300"
+              style={{
+                backdropFilter: 'blur(15px)',
+                WebkitBackdropFilter: 'blur(15px)'
+              }}
+            />
+            {/* Multiple shine layers */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+            <div className="absolute top-1 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/80 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400/80 to-transparent" />
           </a>
         </motion.div>
       </div>
