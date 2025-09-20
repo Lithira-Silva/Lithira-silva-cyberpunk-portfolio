@@ -66,7 +66,7 @@ export default function Header() {
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? 'bg-black/20 backdrop-blur-xl border-b border-cyan-400/30 shadow-lg shadow-cyan-400/10' 
+          ? 'bg-black/20 backdrop-blur-xl shadow-lg shadow-cyan-400/5' 
           : 'bg-black/10 backdrop-blur-md'
       }`}
       initial={{ y: -100 }}
@@ -79,8 +79,8 @@ export default function Header() {
           ? 'linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.4) 100%)'
           : 'linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.2) 100%)',
         boxShadow: scrolled 
-          ? '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-          : '0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+          ? '0 8px 32px rgba(0, 0, 0, 0.2)'
+          : '0 4px 16px rgba(0, 0, 0, 0.1)'
       }}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -280,14 +280,6 @@ export default function Header() {
           )}
         </AnimatePresence>
       </nav>
-
-      {/* Decorative Line */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-20"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: scrolled ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-      />
     </motion.header>
   )
 }
