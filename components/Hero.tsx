@@ -155,7 +155,7 @@ export default function Hero() {
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          <span className="block text-white">John Doe:</span>
+          <span className="block text-white">Lithira Silva:</span>
           <span className="block bg-gradient-to-r from-white via-cyan-400 to-white bg-clip-text text-transparent">
             Architect of Tomorrow's Code
           </span>

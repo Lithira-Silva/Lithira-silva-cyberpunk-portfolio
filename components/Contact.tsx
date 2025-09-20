@@ -55,25 +55,25 @@ const socialLinks = [
   {
     name: 'GitHub',
     icon: Github,
-    url: 'https://github.com/johndoe',
+    url: 'https://github.com/lithirasilva',
     color: '#ffffff'
   },
   {
     name: 'LinkedIn',
     icon: Linkedin,
-    url: 'https://linkedin.com/in/johndoe',
+    url: 'https://linkedin.com/in/lithirasilva',
     color: '#0077B5'
   },
   {
     name: 'Twitter',
     icon: Twitter,
-    url: 'https://twitter.com/johndoe',
+    url: 'https://twitter.com/lithirasilva',
     color: '#1DA1F2'
   },
   {
     name: 'Email',
     icon: Mail,
-    url: 'mailto:john@example.com',
+    url: 'mailto:lithira@example.com',
     color: '#00FFFF'
   }
 ]
@@ -394,7 +394,7 @@ export default function Contact() {
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           <p className="text-gray-400 font-mono text-sm">
-            © 2025 John Doe | Built with Next.js & Love | 
+            © 2025 Lithira Silva | Built with Next.js & Love | 
             <span className="text-cyan-400 ml-1">Architecting Tomorrow's Code</span>
           </p>
         </motion.footer>

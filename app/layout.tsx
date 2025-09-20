@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'John Doe - Architect of Tomorrow\'s Code',
+  title: 'Lithira Silva - Architect of Tomorrow\'s Code',
   description: 'Full-Stack AI Engineer crafting intelligent systems that scale. 10+ years experience in Node.js, Python, React, TensorFlow, and AI integrations.',
   keywords: [
     'full-stack developer',
@@ -15,29 +15,29 @@ export const metadata: Metadata = {
     'Next.js',
     'TypeScript'
   ],
-  authors: [{ name: 'John Doe' }],
-  creator: 'John Doe',
-  publisher: 'John Doe',
+  authors: [{ name: 'Lithira Silva' }],
+  creator: 'Lithira Silva',
+  publisher: 'Lithira Silva',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://johndoe.dev'),
+  metadataBase: new URL('https://lithirasilva.dev'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'John Doe - Architect of Tomorrow\'s Code',
+    title: 'Lithira Silva - Architect of Tomorrow\'s Code',
     description: 'Full-Stack AI Engineer crafting intelligent systems that scale.',
-    url: 'https://johndoe.dev',
-    siteName: 'John Doe Portfolio',
+    url: 'https://lithirasilva.dev',
+    siteName: 'Lithira Silva Portfolio',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'John Doe - Full-Stack AI Engineer',
+        alt: 'Lithira Silva - Full-Stack AI Engineer',
       },
     ],
     locale: 'en_US',
@@ -45,10 +45,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'John Doe - Architect of Tomorrow\'s Code',
+    title: 'Lithira Silva - Architect of Tomorrow\'s Code',
     description: 'Full-Stack AI Engineer crafting intelligent systems that scale.',
     images: ['/og-image.jpg'],
-    creator: '@johndoe',
+    creator: '@lithirasilva',
   },
   robots: {
     index: true,
@@ -100,14 +100,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Person',
-              name: 'John Doe',
+              name: 'Lithira Silva',
               jobTitle: 'Full-Stack AI Engineer',
               description: 'Full-Stack AI Engineer crafting intelligent systems that scale',
-              url: 'https://johndoe.dev',
+              url: 'https://lithirasilva.dev',
               sameAs: [
-                'https://github.com/johndoe',
-                'https://linkedin.com/in/johndoe',
-                'https://twitter.com/johndoe',
+                'https://github.com/lithirasilva',
+                'https://linkedin.com/in/lithirasilva',
+                'https://twitter.com/lithirasilva',
               ],
               knowsAbout: [
                 'Artificial Intelligence',

@@ -150,7 +150,7 @@ export default function About() {
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-cyan-400 group">
                 <Image
                   src="/profile.jpg"
-                  alt="John Doe - Full-Stack AI Engineer"
+                  alt="Lithira Silva - Full-Stack AI Engineer"
                   fill
                   className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   priority

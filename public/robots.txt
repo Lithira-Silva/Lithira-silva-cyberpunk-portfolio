@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://johndoe.dev
+Host: https://lithirasilva.dev
 
 # Sitemaps
-Sitemap: https://johndoe.dev/sitemap.xml
+Sitemap: https://lithirasilva.dev/sitemap.xml

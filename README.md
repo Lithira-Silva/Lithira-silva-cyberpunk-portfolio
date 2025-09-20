@@ -1,8 +1,8 @@
-# 🚀 John Doe Portfolio - Architect of Tomorrow's Code
+# 🚀 Lithira Silva Portfolio - Architect of Tomorrow's Code
 
 A cutting-edge portfolio website built with the latest 2025 web technologies, showcasing a cyberpunk minimalist aesthetic and advanced AI/ML engineering expertise.
 
-![Portfolio Preview](https://via.placeholder.com/1200x600/000000/00FFFF?text=John+Doe+Portfolio)
+![Portfolio Preview](https://via.placeholder.com/1200x600/000000/00FFFF?text=Lithira+Silva+Portfolio)
 
 ## 🎯 Features
 
@@ -51,7 +51,7 @@ A cutting-edge portfolio website built with the latest 2025 web technologies, sh
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/johndoe/portfolio.git
+   git clone https://github.com/lithirasilva/portfolio.git
    cd portfolio
    ```
 
@@ -165,8 +165,8 @@ Create a `.env.local` file for customization:
 
 ```env
 # Site Configuration
-NEXT_PUBLIC_SITE_URL=https://johndoe.dev
-NEXT_PUBLIC_SITE_NAME="John Doe Portfolio"
+NEXT_PUBLIC_SITE_URL=https://lithirasilva.dev
+NEXT_PUBLIC_SITE_NAME="Lithira Silva Portfolio"
 
 # Contact Form (Optional)
 EMAILJS_SERVICE_ID=your_service_id
@@ -293,11 +293,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- **Website**: [johndoe.dev](https://johndoe.dev)
-- **Email**: john@example.com
-- **LinkedIn**: [linkedin.com/in/johndoe](https://linkedin.com/in/johndoe)
-- **GitHub**: [github.com/johndoe](https://github.com/johndoe)
-- **Twitter**: [@johndoe](https://twitter.com/johndoe)
+- **Website**: [lithirasilva.dev](https://lithirasilva.dev)
+- **Email**: lithira@example.com
+- **LinkedIn**: [linkedin.com/in/lithirasilva](https://linkedin.com/in/lithirasilva)
+- **GitHub**: [github.com/lithirasilva](https://github.com/lithirasilva)
+- **Twitter**: [@lithirasilva](https://twitter.com/lithirasilva)
 
 ---
 

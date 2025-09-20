@@ -19,7 +19,7 @@ const projects = [
     },
     links: {
       live: 'https://demo.example.com',
-      github: 'https://github.com/johndoe/ai-ecommerce'
+      github: 'https://github.com/lithirasilva/ai-ecommerce'
     }
   },
   {
@@ -35,7 +35,7 @@ const projects = [
     },
     links: {
       live: 'https://fraud-demo.example.com',
-      github: 'https://github.com/johndoe/fraud-detection'
+      github: 'https://github.com/lithirasilva/fraud-detection'
     }
   },
   {
@@ -51,7 +51,7 @@ const projects = [
     },
     links: {
       live: 'https://cms-demo.example.com',
-      github: 'https://github.com/johndoe/ai-cms'
+      github: 'https://github.com/lithirasilva/ai-cms'
     }
   },
   {
@@ -67,7 +67,7 @@ const projects = [
     },
     links: {
       live: 'https://analytics-demo.example.com',
-      github: 'https://github.com/johndoe/predictive-dashboard'
+      github: 'https://github.com/lithirasilva/predictive-dashboard'
     }
   },
   {
@@ -83,7 +83,7 @@ const projects = [
     },
     links: {
       live: 'https://trading-demo.example.com',
-      github: 'https://github.com/johndoe/neural-trading'
+      github: 'https://github.com/lithirasilva/neural-trading'
     }
   },
   {
@@ -99,7 +99,7 @@ const projects = [
     },
     links: {
       live: 'https://iot-demo.example.com',
-      github: 'https://github.com/johndoe/smart-city'
+      github: 'https://github.com/lithirasilva/smart-city'
     }
   }
 ]
@@ -269,7 +269,7 @@ export default function Projects() {
             Want to see more projects or collaborate on something amazing?
           </p>
           <a
-            href="https://github.com/johndoe"
+            href="https://github.com/lithirasilva"
             target="_blank"
             rel="noopener noreferrer"
             className="glow-button"
