@@ -14,6 +14,16 @@ interface Particle {
   life: number
 }
 
+// Cyberpunk typing animation texts
+const typingTexts = [
+  "Full-Stack AI Engineer | Crafting Intelligent Systems That Scale",
+  "Building Scalable Intelligent Systems with MERN & AWS",
+  "Machine Learning Engineer | Transforming Data into Intelligence", 
+  "Cloud Architect | Designing Tomorrow's Digital Infrastructure",
+  "DevOps Engineer | Automating the Future with Docker & Kubernetes",
+  "Full-Stack Developer | Creating Seamless User Experiences"
+]
+
 function createParticle(canvasWidth: number, canvasHeight: number): Particle {
   return {
     x: Math.random() * canvasWidth,
@@ -106,6 +116,61 @@ function AnimatedParticles() {
   )
 }
 
+function TypingAnimation() {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [currentText, setCurrentText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [showCursor, setShowCursor] = useState(true)
+
+  useEffect(() => {
+    const targetText = typingTexts[currentTextIndex]
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing forward
+        if (currentText.length < targetText.length) {
+          setCurrentText(targetText.slice(0, currentText.length + 1))
+        } else {
+          // Wait before starting to delete
+          setTimeout(() => setIsDeleting(true), 2000)
+        }
+      } else {
+        // Deleting backward
+        if (currentText.length > 0) {
+          setCurrentText(currentText.slice(0, -1))
+        } else {
+          // Move to next text
+          setIsDeleting(false)
+          setCurrentTextIndex((prev) => (prev + 1) % typingTexts.length)
+        }
+      }
+    }, isDeleting ? 50 : Math.random() * 100 + 50) // Variable speed for realistic typing
+
+    return () => clearTimeout(timeout)
+  }, [currentText, isDeleting, currentTextIndex])
+
+  // Cursor blinking effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 500)
+
+    return () => clearInterval(cursorInterval)
+  }, [])
+
+  return (
+    <span className="relative">
+      {currentText}
+      <span 
+        className={`inline-block w-0.5 h-6 md:h-8 lg:h-10 xl:h-12 bg-cyan-400 ml-1 transition-opacity duration-100 ${
+          showCursor ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{ animation: 'glow 1.5s ease-in-out infinite alternate' }}
+      />
+    </span>
+  )
+}
+
 function FloatingContactIcon() {
   return (
     <motion.div
@@ -143,14 +208,14 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black pt-20 lg:pt-16">
       {/* Animated Background */}
       <AnimatedParticles />
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto py-12 lg:py-16">
         <motion.h1
-          className="font-orbitron font-black text-4xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6"
+          className="font-orbitron font-black text-4xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-8 lg:mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -162,12 +227,12 @@ export default function Hero() {
         </motion.h1>
 
         <motion.h2
-          className="font-mono text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 mb-12 leading-relaxed"
+          className="font-mono text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 mb-16 lg:mb-12 leading-relaxed max-w-4xl mx-auto min-h-[3rem] md:min-h-[4rem] lg:min-h-[5rem] xl:min-h-[6rem]"
           initial={{ opacity: 0, y: 30 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
         >
-          Full-Stack AI Engineer | Crafting Intelligent Systems That Scale
+          <TypingAnimation />
         </motion.h2>
 
         <motion.div
@@ -198,7 +263,7 @@ export default function Hero() {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="mt-12 flex justify-center"
+          className="mt-16 lg:mt-12 flex justify-center"
           initial={{ opacity: 0 }}
           animate={isLoaded ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 1.5 }}
