@@ -63,13 +63,13 @@ const Footer = () => {
     {
       name: 'GitHub',
       icon: Github,
-      url: 'https://github.com/lithira-silva',
+      url: 'https://github.com/Lithira-Silva',
       color: 'hover:text-purple-400'
     },
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      url: 'https://linkedin.com/in/lithira-silva',
+      url: 'https://www.linkedin.com/in/lithira-silva-20b42a370',
       color: 'hover:text-blue-400'
     },
     {

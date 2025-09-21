@@ -75,7 +75,7 @@ const socialLinks = [
   {
     name: 'LinkedIn',
     icon: Linkedin,
-    url: 'https://linkedin.com/in/lithirasilva',
+    url: 'https://www.linkedin.com/in/lithira-silva-20b42a370',
     color: '#0077B5'
   },
   {
@@ -385,7 +385,7 @@ export default function Contact() {
                   <strong className="text-white">Response time:</strong> Usually within 24 hours
                 </p>
                 <p className="leading-relaxed">
-                  <strong className="text-white">Location:</strong> San Francisco, CA (Open to remote)
+                  <strong className="text-white">Location:</strong> Colombo, Sri Lanka (Open to remote)
                 </p>
                 <p className="leading-relaxed">
                   <strong className="text-white">Availability:</strong> Open for freelance & full-time opportunities

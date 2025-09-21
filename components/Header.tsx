@@ -15,7 +15,7 @@ const navigation = [
 
 const socialLinks = [
   { name: 'GitHub', href: 'https://github.com/Lithira-Silva', icon: Github },
-  { name: 'LinkedIn', href: 'https://linkedin.com/in/lithirasilva', icon: Linkedin },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/lithira-silva-20b42a370', icon: Linkedin },
   { name: 'Email', href: 'mailto:lithira@example.com', icon: Mail },
 ]
 

@@ -295,7 +295,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Website**: [lithirasilva.dev](https://lithirasilva.dev)
 - **Email**: lithira@example.com
-- **LinkedIn**: [linkedin.com/in/lithirasilva](https://linkedin.com/in/lithirasilva)
+- **LinkedIn**: [www.linkedin.com/in/lithira-silva-20b42a370](https://www.linkedin.com/in/lithira-silva-20b42a370)
 - **GitHub**: [github.com/Lithira-Silva](https://github.com/Lithira-Silva)
 - **Twitter**: [@lithirasilva](https://twitter.com/lithirasilva)
 

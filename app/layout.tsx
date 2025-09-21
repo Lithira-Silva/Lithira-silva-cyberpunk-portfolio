@@ -106,7 +106,7 @@ export default function RootLayout({
               url: 'https://lithirasilva.dev',
               sameAs: [
                 'https://github.com/Lithira-Silva',
-                'https://linkedin.com/in/lithirasilva',
+                'https://www.linkedin.com/in/lithira-silva-20b42a370',
                 'https://twitter.com/lithirasilva',
               ],
               knowsAbout: [
