@@ -12,34 +12,34 @@ const skills = [
 
 const achievements = [
   {
+    year: '2025',
+    title: 'Information Technology Degree',
+    company: 'SLIIT (Sri Lanka Institute of Information Technology)',
+    description: 'Pursuing Bachelor of Science in Information Technology with focus on Full-Stack Development and Cloud Computing'
+  },
+  {
     year: '2024',
-    title: 'AI Integration Lead',
-    company: 'TechCorp',
-    description: 'Led development of ML-powered recommendation system serving 2M+ users'
+    title: 'Advanced Cloud Computing Certification',
+    company: 'Professional Development',
+    description: 'Completed AWS Solutions Architect Professional and Google Cloud ML Engineer certifications'
   },
   {
     year: '2023',
-    title: 'Senior Full-Stack Engineer',
-    company: 'InnovateLab',
-    description: 'Built scalable microservices architecture handling 100k+ daily transactions'
+    title: 'Full-Stack Development Specialization',
+    company: 'Technical Training',
+    description: 'Mastered MERN stack, TypeScript, and modern web development frameworks through intensive projects'
   },
   {
     year: '2022',
-    title: 'ML Engineer',
-    company: 'DataFlow Inc',
-    description: 'Developed real-time fraud detection system with 99.7% accuracy'
+    title: 'Programming Foundations',
+    company: 'Academic Study',
+    description: 'Built strong foundation in Java, Python, C++, and software engineering principles'
   },
   {
     year: '2021',
-    title: 'Full-Stack Developer',
-    company: 'StartupXYZ',
-    description: 'Created MVP that secured $2M Series A funding'
-  },
-  {
-    year: '2020',
-    title: 'Software Engineer',
-    company: 'CloudTech',
-    description: 'Optimized database queries resulting in 60% performance improvement'
+    title: 'IT Foundation Studies',
+    company: 'SLIIT',
+    description: 'Started Information Technology degree program, establishing core computing and mathematics skills'
   }
 ]
 
@@ -157,8 +157,9 @@ export default function About() {
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-cyan-400 group">
                 <Image
                   src="/profile.jpg"
-                  alt="Lithira Silva - Full-Stack AI Engineer"
+                  alt="Lithira Silva - IT Student & Full-Stack Developer"
                   fill
+                  sizes="(max-width: 768px) 320px, 320px"
                   className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   priority
                 />
@@ -232,7 +233,7 @@ export default function About() {
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           <h3 className="font-orbitron font-bold text-2xl md:text-3xl text-white mb-8 text-center">
-            Career Milestones
+            Education
           </h3>
           <AnimatedTimeline />
         </motion.div>
