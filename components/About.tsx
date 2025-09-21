@@ -176,27 +176,29 @@ export default function About() {
           >
             <div className="space-y-6 text-gray-300 font-mono leading-relaxed">
               <p className="text-lg">
-                With over <strong className="text-cyan-400">10 years</strong> of experience crafting digital solutions, 
-                I specialize in building intelligent systems that bridge the gap between complex AI algorithms 
-                and real-world applications.
+                As an <strong className="text-cyan-400">IT undergraduate at SLIIT</strong> specializing in Information Technology, 
+                I am a passionate Full-Stack Developer with a growing proficiency in <strong className="text-white">TypeScript</strong>, 
+                alongside a strong foundation in <strong className="text-white">Java</strong>, <strong className="text-white">Python</strong>, 
+                <strong className="text-white">C++</strong>, and the <strong className="text-cyan-400">MERN stack</strong>.
               </p>
               
               <p>
-                My journey began in traditional web development, but I quickly found my passion in the intersection 
-                of <strong className="text-white">artificial intelligence</strong> and <strong className="text-white">scalable web architecture</strong>. 
-                Today, I architect full-stack solutions that leverage cutting-edge ML models to solve business-critical problems.
+                Currently diving into <strong className="text-cyan-400">cloud computing</strong>, I aim to master the latest advancements 
+                and integrate <strong className="text-white">AI technologies</strong> to elevate my skills to global standards. 
+                My diverse interests span <strong className="text-white">software engineering</strong>, 
+                <strong className="text-white">web and mobile app development</strong>, and <strong className="text-white">cloud solutions</strong>.
               </p>
               
               <p>
-                From building <strong className="text-cyan-400">real-time recommendation engines</strong> that serve millions of users 
-                to developing <strong className="text-cyan-400">fraud detection systems</strong> with 99.7% accuracy, 
-                I thrive on transforming complex data into actionable insights through elegant, performant code.
+                My passion is fueled by hands-on projects like <strong className="text-cyan-400">construction bidding platforms</strong> 
+                and <strong className="text-cyan-400">Android apps</strong>, where I continuously challenge myself to build innovative solutions 
+                that solve real-world problems with cutting-edge technology.
               </p>
               
               <p>
-                When I'm not coding, you'll find me exploring the latest developments in <strong className="text-white">transformer architectures</strong>, 
-                contributing to open-source AI projects, or mentoring the next generation of engineers who share my passion 
-                for building tomorrow's intelligent systems.
+                Beyond coding, I stay updated with <strong className="text-white">cutting-edge trends</strong> and enjoy collaborating 
+                on innovative tech initiatives. I believe in the power of continuous learning and am always eager to explore 
+                new technologies that can make a meaningful impact.
               </p>
             </div>
 

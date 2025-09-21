@@ -5,11 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Github, Linkedin, Mail, Download, FileText } from 'lucide-react'
 
 const navigation = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '#home', id: 'home' },
+  { name: 'About', href: '#about', id: 'about' },
+  { name: 'Projects', href: '#projects', id: 'projects' },
+  { name: 'Certificates', href: '#certificates', id: 'certificates' },
+  { name: 'Skills', href: '#skills', id: 'skills' },
+  { name: 'Contact', href: '#contact', id: 'contact' },
 ]
 
 const socialLinks = [
@@ -21,17 +22,42 @@ const socialLinks = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
+      
+      // Get current scroll position
+      const scrollPosition = window.scrollY + 100 // Offset for header height
+      
+      // Check which section is currently in view
+      const sections = ['home', 'about', 'projects', 'certificates', 'skills', 'contact']
+      
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          const elementTop = window.scrollY + rect.top
+          const elementBottom = elementTop + rect.height
+          
+          // Check if current scroll position is within this section
+          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+            setActiveSection(sectionId)
+            break
+          }
+        }
+      }
     }
 
     window.addEventListener('scroll', handleScroll)
+    // Call once on mount to set initial state
+    handleScroll()
+    
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = (href: string, sectionId: string) => {
     if (href.startsWith('#')) {
       // Check if we're on the homepage first
       if (window.location.pathname !== '/') {
@@ -42,6 +68,7 @@ export default function Header() {
         const element = document.querySelector(href)
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' })
+          setActiveSection(sectionId)
         }
       }
       setIsOpen(false)
@@ -92,7 +119,7 @@ export default function Header() {
             whileTap={{ scale: 0.95 }}
           >
             <button
-              onClick={() => scrollToSection('#home')}
+              onClick={() => scrollToSection('#home', 'home')}
               className="group flex items-center space-x-2"
             >
               <div className="relative">
@@ -125,8 +152,12 @@ export default function Header() {
               {navigation.map((item, index) => (
                 <motion.button
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="relative font-mono text-sm text-gray-300 hover:text-cyan-400 transition-all duration-300 group px-3 py-2 rounded-lg"
+                  onClick={() => scrollToSection(item.href, item.id)}
+                  className={`relative font-mono text-sm transition-all duration-300 group px-3 py-2 rounded-lg ${
+                    activeSection === item.id 
+                      ? 'text-cyan-400' 
+                      : 'text-gray-300 hover:text-cyan-400'
+                  }`}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -143,7 +174,9 @@ export default function Header() {
                     }}
                   />
                   <span className="relative z-10">{item.name}</span>
-                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-cyan-500 group-hover:w-full transition-all duration-300"></div>
+                  <div className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-cyan-500 transition-all duration-300 ${
+                    activeSection === item.id ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}></div>
                 </motion.button>
               ))}
             </div>
@@ -231,8 +264,12 @@ export default function Header() {
                 {navigation.map((item, index) => (
                   <motion.button
                     key={item.name}
-                    onClick={() => scrollToSection(item.href)}
-                    className="block w-full text-left px-3 py-2 font-mono text-base text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/5 rounded-md transition-all duration-300"
+                    onClick={() => scrollToSection(item.href, item.id)}
+                    className={`block w-full text-left px-3 py-2 font-mono text-base transition-all duration-300 rounded-md ${
+                      activeSection === item.id
+                        ? 'text-cyan-400 bg-cyan-400/10'
+                        : 'text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/5'
+                    }`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
