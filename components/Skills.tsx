@@ -2,185 +2,152 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { Code, Server, Smartphone, Brain, Cloud, Settings, Monitor, Database, Cpu, Zap, Shield, Globe, type LucideIcon } from 'lucide-react'
 
 interface Skill {
   name: string
   level: number
-  category: 'frontend' | 'backend' | 'ai' | 'tools'
-  icon: string
+  category: 'frontend' | 'backend' | 'mobile' | 'ai' | 'cloud' | 'tools'
+  icon: LucideIcon
+  featured: boolean
 }
 
+// Streamlined skills data - only featured/most important skills
 const skills: Skill[] = [
-  { name: 'React/Next.js', level: 95, category: 'frontend', icon: '⚛️' },
-  { name: 'TypeScript', level: 92, category: 'frontend', icon: '🟦' },
-  { name: 'Tailwind CSS', level: 90, category: 'frontend', icon: '🎨' },
-  { name: 'Node.js', level: 94, category: 'backend', icon: '🟢' },
-  { name: 'Python/Django', level: 96, category: 'backend', icon: '🐍' },
-  { name: 'PostgreSQL', level: 88, category: 'backend', icon: '🐘' },
-  { name: 'TensorFlow', level: 89, category: 'ai', icon: '🧠' },
-  { name: 'PyTorch', level: 85, category: 'ai', icon: '🔥' },
-  { name: 'OpenAI API', level: 91, category: 'ai', icon: '🤖' },
-  { name: 'Docker', level: 87, category: 'tools', icon: '🐳' },
-  { name: 'AWS/Cloud', level: 83, category: 'tools', icon: '☁️' },
-  { name: 'Git/GitHub', level: 93, category: 'tools', icon: '📦' },
+  // Featured Frontend Technologies
+  { name: 'React/Next.js', level: 95, category: 'frontend', icon: Code, featured: true },
+  { name: 'TypeScript', level: 92, category: 'frontend', icon: Monitor, featured: true },
+  { name: 'Tailwind CSS', level: 90, category: 'frontend', icon: Globe, featured: true },
+
+  // Featured Backend Technologies  
+  { name: 'Node.js', level: 89, category: 'backend', icon: Server, featured: true },
+  { name: 'Express.js', level: 87, category: 'backend', icon: Zap, featured: true },
+  { name: 'MongoDB', level: 85, category: 'backend', icon: Database, featured: true },
+
+  // Featured Mobile Development
+  { name: 'Kotlin', level: 87, category: 'mobile', icon: Smartphone, featured: true },
+  { name: 'Android SDK', level: 83, category: 'mobile', icon: Cpu, featured: true },
+
+  // Featured AI/ML Technologies
+  { name: 'ChatGPT/OpenAI', level: 93, category: 'ai', icon: Brain, featured: true },
+  { name: 'Prompt Engineering', level: 91, category: 'ai', icon: Zap, featured: true },
+
+  // Featured Cloud & DevOps
+  { name: 'AWS', level: 84, category: 'cloud', icon: Cloud, featured: true },
+  { name: 'DevOps/CI/CD', level: 83, category: 'cloud', icon: Settings, featured: true },
+
+  // Featured Development Tools
+  { name: 'Git/GitHub', level: 93, category: 'tools', icon: Settings, featured: true },
+  { name: 'Vercel', level: 88, category: 'tools', icon: Shield, featured: true }
 ]
 
 const categoryColors = {
   frontend: '#00FFFF',
-  backend: '#FF6B6B',
-  ai: '#4ECDC4',
-  tools: '#FFE66D'
+  backend: '#FF6B6B', 
+  mobile: '#4ECDC4',
+  ai: '#9B59B6',
+  cloud: '#FFE66D',
+  tools: '#95A5A6'
 }
 
 const categoryLabels = {
   frontend: 'Frontend',
   backend: 'Backend',
+  mobile: 'Mobile',
   ai: 'AI/ML',
-  tools: 'DevOps'
+  cloud: 'Cloud',
+  tools: 'Tools'
 }
 
-function SkillOrb({ skill, index, isVisible }: { skill: Skill; index: number; isVisible: boolean }) {
+const categoryIcons: Record<string, LucideIcon> = {
+  frontend: Code,
+  backend: Server,
+  mobile: Smartphone,
+  ai: Brain,
+  cloud: Cloud,
+  tools: Settings
+}
+
+function SkillCard({ skill, index, isVisible }: { skill: Skill; index: number; isVisible: boolean }) {
   const [isHovered, setIsHovered] = useState(false)
-  
-  // Calculate position in constellation pattern
-  const angle = (index * 360) / skills.length
-  const radius = 180 + (skill.level / 100) * 50
-  const x = Math.cos((angle * Math.PI) / 180) * radius
-  const y = Math.sin((angle * Math.PI) / 180) * radius
+  const IconComponent = skill.icon
 
   return (
     <motion.div
-      className="absolute"
-      style={{
-        left: `calc(50% + ${x}px)`,
-        top: `calc(50% + ${y}px)`,
-        transform: 'translate(-50%, -50%)',
-      }}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="group h-full"
+      initial={{ opacity: 0, y: 50 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.05 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <div className="relative group">
-        {/* Skill Orb */}
-        <motion.div
-          className="w-16 h-16 rounded-full border-2 flex items-center justify-center cursor-pointer transition-all duration-300"
-          style={{
-            borderColor: categoryColors[skill.category],
-            backgroundColor: isHovered ? categoryColors[skill.category] : 'transparent',
-          }}
-          animate={{
-            scale: isHovered ? 1.2 : 1,
-            boxShadow: isHovered
-              ? `0 0 20px ${categoryColors[skill.category]}80`
-              : `0 0 10px ${categoryColors[skill.category]}40`,
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          <span className="text-2xl">{skill.icon}</span>
-        </motion.div>
-
-        {/* Progress Ring */}
-        <svg
-          className="absolute inset-0 w-16 h-16 -rotate-90"
-          viewBox="0 0 64 64"
-        >
-          <circle
-            cx="32"
-            cy="32"
-            r="28"
-            stroke="rgba(255,255,255,0.1)"
-            strokeWidth="2"
-            fill="none"
-          />
-          <motion.circle
-            cx="32"
-            cy="32"
-            r="28"
-            stroke={categoryColors[skill.category]}
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeDasharray={`${2 * Math.PI * 28}`}
-            initial={{ strokeDashoffset: 2 * Math.PI * 28 }}
-            animate={
-              isVisible
-                ? {
-                    strokeDashoffset:
-                      2 * Math.PI * 28 - (skill.level / 100) * 2 * Math.PI * 28,
-                  }
-                : {}
-            }
-            transition={{ duration: 1.5, delay: index * 0.1 }}
-          />
-        </svg>
-
-        {/* Tooltip */}
-        <motion.div
-          className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-3 py-2 rounded-lg pointer-events-none"
-          style={{
-            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 255, 255, 0.08) 50%, rgba(10, 10, 10, 0.9) 100%)',
-            backdropFilter: 'blur(12px) saturate(120%)',
-            WebkitBackdropFilter: 'blur(12px) saturate(120%)',
-            border: '1px solid rgba(115, 115, 115, 0.3)',
-            boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-          }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="text-white font-mono text-sm whitespace-nowrap text-center">
-            <div className="font-bold">{skill.name}</div>
-            <div className="text-xs" style={{ color: categoryColors[skill.category] }}>
-              {skill.level}% • {categoryLabels[skill.category]}
+      <div
+        className="h-full p-4 rounded-xl transition-all duration-500 hover:scale-105 border cursor-pointer"
+        style={{
+          background: isHovered 
+            ? `linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, ${categoryColors[skill.category]}15 30%, rgba(10, 10, 10, 0.95) 100%)`
+            : 'linear-gradient(135deg, rgba(20, 20, 20, 0.85) 0%, rgba(0, 255, 255, 0.05) 30%, rgba(10, 10, 10, 0.9) 100%)',
+          backdropFilter: 'blur(18px) saturate(160%)',
+          WebkitBackdropFilter: 'blur(18px) saturate(160%)',
+          borderColor: isHovered ? categoryColors[skill.category] : 'rgba(115, 115, 115, 0.25)',
+          boxShadow: isHovered 
+            ? `0 25px 50px ${categoryColors[skill.category]}25, inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 40px ${categoryColors[skill.category]}15`
+            : '0 15px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+        }}
+      >
+        {/* Skill Header */}
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center space-x-2">
+            <IconComponent 
+              size={20} 
+              className="flex-shrink-0"
+              color={categoryColors[skill.category]}
+            />
+            <div>
+              <h3 className="font-orbitron font-bold text-white text-sm">{skill.name}</h3>
+              <span 
+                className="text-xs font-mono font-medium"
+                style={{ color: categoryColors[skill.category] }}
+              >
+                {categoryLabels[skill.category]}
+              </span>
             </div>
           </div>
-          <div
-            className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0"
-            style={{
-              borderLeft: '4px solid transparent',
-              borderRight: '4px solid transparent',
-              borderTop: '4px solid #374151',
-            }}
-          />
-        </motion.div>
+          <div className="text-right">
+            <div 
+              className="text-lg font-orbitron font-black"
+              style={{ color: categoryColors[skill.category] }}
+            >
+              {skill.level}%
+            </div>
+          </div>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="mb-2">
+          <div className="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+            <motion.div
+              className="h-full rounded-full"
+              style={{ backgroundColor: categoryColors[skill.category] }}
+              initial={{ width: 0 }}
+              animate={isVisible ? { width: `${skill.level}%` } : {}}
+              transition={{ duration: 1.5, delay: index * 0.05 + 0.5 }}
+            />
+          </div>
+        </div>
+
+        {/* Hover Glow Effect */}
+        <motion.div
+          className="absolute inset-0 rounded-xl pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at center, ${categoryColors[skill.category]}10 0%, transparent 70%)`,
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+        />
       </div>
     </motion.div>
-  )
-}
-
-function ConstellationLines({ isVisible }: { isVisible: boolean }) {
-  return (
-    <svg className="absolute inset-0 w-full h-full pointer-events-none">
-      {skills.map((skill, index) => {
-        const nextIndex = (index + 1) % skills.length
-        const angle1 = (index * 360) / skills.length
-        const angle2 = (nextIndex * 360) / skills.length
-        const radius1 = 180 + (skill.level / 100) * 50
-        const radius2 = 180 + (skills[nextIndex].level / 100) * 50
-        
-        const x1 = Math.cos((angle1 * Math.PI) / 180) * radius1
-        const y1 = Math.sin((angle1 * Math.PI) / 180) * radius1
-        const x2 = Math.cos((angle2 * Math.PI) / 180) * radius2
-        const y2 = Math.sin((angle2 * Math.PI) / 180) * radius2
-
-        return (
-          <motion.line
-            key={index}
-            x1={`calc(50% + ${x1}px)`}
-            y1={`calc(50% + ${y1}px)`}
-            x2={`calc(50% + ${x2}px)`}
-            y2={`calc(50% + ${y2}px)`}
-            stroke="rgba(0, 255, 255, 0.2)"
-            strokeWidth="1"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
-            transition={{ duration: 2, delay: 1 + index * 0.1 }}
-          />
-        )
-      })}
-    </svg>
   )
 }
 
@@ -195,7 +162,7 @@ export default function Skills() {
           setIsVisible(true)
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     )
 
     if (sectionRef.current) {
@@ -212,6 +179,7 @@ export default function Skills() {
       className="py-20 md:py-32 section-padding bg-black relative overflow-hidden"
     >
       <div className="container-max">
+        {/* Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -219,62 +187,46 @@ export default function Skills() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="font-orbitron font-black text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-            Technical <span className="text-cyan-400">Constellation</span>
+            Technical <span className="text-cyan-400">Arsenal</span>
           </h2>
           <div className="w-24 h-1 bg-cyan-400 mx-auto mb-6"></div>
           <p className="text-gray-300 font-mono text-lg max-w-3xl mx-auto leading-relaxed">
-            A visual representation of my technical expertise across the full stack of modern development.
-            Hover over each skill to see proficiency levels and categories.
+            Core technologies mastering full-stack development, mobile applications, 
+            AI integration, and cloud infrastructure.
           </p>
         </motion.div>
 
-        {/* Skills Constellation */}
-        <div className="relative max-w-4xl mx-auto">
-          <div className="aspect-square relative min-h-[600px]">
-            {/* Center Hub */}
-            <motion.div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-2 border-cyan-400 bg-black flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.8 }}
-              style={{
-                boxShadow: '0 0 30px rgba(0, 255, 255, 0.5)',
-              }}
-            >
-              <span className="text-2xl">⚡</span>
-            </motion.div>
-
-            {/* Constellation Lines */}
-            <ConstellationLines isVisible={isVisible} />
-
-            {/* Skill Orbs */}
-            {skills.map((skill, index) => (
-              <SkillOrb
-                key={skill.name}
-                skill={skill}
-                index={index}
-                isVisible={isVisible}
-              />
-            ))}
-          </div>
+        {/* Skills Grid - Compact Layout */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-w-6xl mx-auto">
+          {skills.map((skill, index) => (
+            <SkillCard
+              key={skill.name}
+              skill={skill}
+              index={index}
+              isVisible={isVisible}
+            />
+          ))}
         </div>
 
-        {/* Legend */}
+        {/* Category Legend - Compact */}
         <motion.div
-          className="mt-16 flex flex-wrap justify-center gap-8"
+          className="mt-12 flex flex-wrap justify-center gap-6"
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
-          {Object.entries(categoryLabels).map(([key, label]) => (
-            <div key={key} className="flex items-center space-x-2">
-              <div
-                className="w-4 h-4 rounded-full"
-                style={{ backgroundColor: categoryColors[key as keyof typeof categoryColors] }}
-              />
-              <span className="text-gray-300 font-mono text-sm">{label}</span>
-            </div>
-          ))}
+          {Object.entries(categoryLabels).map(([key, label]) => {
+            const IconComponent = categoryIcons[key as keyof typeof categoryIcons]
+            return (
+              <div key={key} className="flex items-center space-x-2">
+                <IconComponent 
+                  size={16} 
+                  color={categoryColors[key as keyof typeof categoryColors]}
+                />
+                <span className="text-gray-300 font-mono text-sm">{label}</span>
+              </div>
+            )
+          })}
         </motion.div>
       </div>
     </section>

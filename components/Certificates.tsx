@@ -2,101 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, Award, Calendar, CheckCircle, Star } from 'lucide-react'
+import { ExternalLink, Award, Calendar, Download } from 'lucide-react'
 import Image from 'next/image'
-
-const certificates = [
-  {
-    id: 1,
-    title: 'AWS Certified Solutions Architect - Professional',
-    issuer: 'Amazon Web Services',
-    description: 'Advanced certification demonstrating expertise in designing distributed applications and systems on AWS platform with focus on scalability, security, and cost optimization.',
-    image: '/project-1.jpg', // Placeholder - replace with actual certificate image
-    credentialId: 'AWS-PSA-2024-001',
-    issueDate: '2024',
-    expiryDate: '2027',
-    verifyUrl: 'https://aws.amazon.com/verification/cert-001',
-    skills: ['AWS', 'Cloud Architecture', 'DevOps', 'Security', 'Cost Optimization'],
-    level: 'Professional',
-    featured: true
-  },
-  {
-    id: 2,
-    title: 'Google Cloud Professional Machine Learning Engineer',
-    issuer: 'Google Cloud',
-    description: 'Professional certification validating skills in designing, building, and productionizing ML models using Google Cloud technologies and best practices.',
-    image: '/project-2.jpg', // Placeholder - replace with actual certificate image
-    credentialId: 'GCP-MLE-2024-002',
-    issueDate: '2024',
-    expiryDate: '2026',
-    verifyUrl: 'https://cloud.google.com/certification/verify/cert-002',
-    skills: ['TensorFlow', 'AutoML', 'BigQuery ML', 'Vertex AI', 'MLOps'],
-    level: 'Professional',
-    featured: true
-  },
-  {
-    id: 3,
-    title: 'Microsoft Azure AI Engineer Associate',
-    issuer: 'Microsoft',
-    description: 'Certification demonstrating proficiency in implementing AI solutions using Azure Cognitive Services, Machine Learning, and Knowledge Mining services.',
-    image: '/project-3.jpg', // Placeholder - replace with actual certificate image
-    credentialId: 'AZ-AI-2024-003',
-    issueDate: '2024',
-    expiryDate: '2026',
-    verifyUrl: 'https://learn.microsoft.com/verification/cert-003',
-    skills: ['Azure AI', 'Cognitive Services', 'Computer Vision', 'NLP', 'Bot Framework'],
-    level: 'Associate',
-    featured: true
-  },
-  {
-    id: 4,
-    title: 'Kubernetes Certified Application Developer',
-    issuer: 'Cloud Native Computing Foundation',
-    description: 'Certification proving ability to design, build and configure cloud native applications for Kubernetes.',
-    image: '/project-4.jpg', // Placeholder - replace with actual certificate image
-    credentialId: 'CKAD-2024-004',
-    issueDate: '2024',
-    expiryDate: '2027',
-    verifyUrl: 'https://cncf.io/certification/verify/cert-004',
-    skills: ['Kubernetes', 'Docker', 'Microservices', 'DevOps', 'Container Orchestration'],
-    level: 'Professional',
-    featured: false
-  },
-  {
-    id: 5,
-    title: 'TensorFlow Developer Certificate',
-    issuer: 'TensorFlow',
-    description: 'Google certification program demonstrating proficiency in using TensorFlow to solve deep learning and ML problems.',
-    image: '/project-5.jpg', // Placeholder - replace with actual certificate image
-    credentialId: 'TF-DEV-2023-005',
-    issueDate: '2023',
-    expiryDate: '2026',
-    verifyUrl: 'https://tensorflow.org/certificate/verify/cert-005',
-    skills: ['TensorFlow', 'Deep Learning', 'Neural Networks', 'Computer Vision', 'NLP'],
-    level: 'Professional',
-    featured: false
-  },
-  {
-    id: 6,
-    title: 'HashiCorp Certified: Terraform Associate',
-    issuer: 'HashiCorp',
-    description: 'Certification validating skills in Infrastructure as Code using Terraform for cloud resource management.',
-    image: '/project-6.jpg', // Placeholder - replace with actual certificate image
-    credentialId: 'HC-TA-2023-006',
-    issueDate: '2023',
-    expiryDate: '2025',
-    verifyUrl: 'https://hashicorp.com/certification/verify/cert-006',
-    skills: ['Terraform', 'Infrastructure as Code', 'Cloud Automation', 'DevOps'],
-    level: 'Associate',
-    featured: false
-  }
-]
-
-// Get only featured certificates for homepage
-const featuredCertificates = certificates.filter(cert => cert.featured)
+import { CertificationData, featuredCertifications, allCertifications } from '@/lib/certificationData'
 
 interface CertificateCardProps {
-  certificate: typeof certificates[0]
+  certificate: CertificationData
   index: number
   isVisible: boolean
 }
@@ -140,43 +51,6 @@ function CertificateCard({ certificate, index, isVisible }: CertificateCardProps
           animate={{ opacity: isHovered ? 0.1 : 0 }}
           transition={{ duration: 0.3 }}
         />
-        
-        {/* Action Buttons */}
-        <motion.div
-          className="absolute top-4 right-4 flex space-x-2"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : -20 }}
-          transition={{ duration: 0.3 }}
-        >
-          <a
-            href={certificate.verifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full flex items-center justify-center text-cyan-400 transition-all duration-300 hover:scale-110"
-            aria-label={`Verify ${certificate.title}`}
-            style={{
-              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.8) 100%)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1px solid rgba(0, 255, 255, 0.3)',
-              boxShadow: '0 4px 15px rgba(0, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-            }}
-          >
-            <CheckCircle size={18} />
-          </a>
-        </motion.div>
-
-        {/* Certificate Level Badge */}
-        <div className="absolute bottom-4 left-4">
-          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-mono font-bold ${
-            certificate.level === 'Professional' 
-              ? 'bg-yellow-500 text-black' 
-              : 'bg-blue-500 text-white'
-          }`}>
-            <Star size={12} className="mr-1" />
-            {certificate.level}
-          </span>
-        </div>
       </div>
 
       {/* Certificate Content */}
@@ -184,6 +58,28 @@ function CertificateCard({ certificate, index, isVisible }: CertificateCardProps
         <h3 className="font-orbitron font-bold text-xl text-white mb-2 line-clamp-2">
           {certificate.title}
         </h3>
+        
+        {/* Download Button - Small button under certificate name */}
+        {certificate.downloadUrl && (
+          <div className="mb-3">
+            <a
+              href={certificate.downloadUrl}
+              download
+              className="inline-flex items-center px-3 py-1.5 rounded-lg text-white text-xs font-mono transition-all duration-300 hover:scale-105"
+              aria-label={`Download ${certificate.title}`}
+              style={{
+                background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 255, 0.15) 50%, rgba(0, 255, 255, 0.1) 100%)',
+                backdropFilter: 'blur(10px) saturate(150%)',
+                WebkitBackdropFilter: 'blur(10px) saturate(150%)',
+                border: '1px solid rgba(0, 255, 255, 0.4)',
+                boxShadow: '0 4px 15px rgba(0, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+              }}
+            >
+              <Download size={14} className="mr-1.5" />
+              Download PDF
+            </a>
+          </div>
+        )}
         
         <p className="text-cyan-400 font-mono text-sm mb-3">
           {certificate.issuer}
@@ -195,27 +91,19 @@ function CertificateCard({ certificate, index, isVisible }: CertificateCardProps
 
         {/* Skills */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {certificate.skills.map((skill) => (
+          {certificate.skills.map((skill: string) => (
             <span key={skill} className="tech-badge text-xs">
               {skill}
             </span>
           ))}
         </div>
 
-        {/* Certificate Details */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs font-mono">
-            <span className="text-gray-400">Issued:</span>
-            <span className="text-cyan-400 font-medium">{certificate.issueDate}</span>
-          </div>
-          <div className="flex items-center justify-between text-xs font-mono">
-            <span className="text-gray-400">Expires:</span>
-            <span className="text-cyan-400 font-medium">{certificate.expiryDate}</span>
-          </div>
-          <div className="flex items-center justify-between text-xs font-mono">
-            <span className="text-gray-400">ID:</span>
-            <span className="text-cyan-400 font-medium font-mono text-xs">{certificate.credentialId}</span>
-          </div>
+        {/* Certificate Details - Compact */}
+        <div className="flex items-center justify-between text-xs font-mono">
+          <span className="text-gray-400">
+            {certificate.issueDate} {certificate.expiryDate !== 'Never' ? `- ${certificate.expiryDate}` : ''}
+          </span>
+          <span className="text-cyan-400 font-medium">{certificate.status}</span>
         </div>
       </div>
     </motion.div>
@@ -268,7 +156,7 @@ export default function Certificates() {
 
         {/* Certificates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredCertificates.map((certificate, index) => (
+          {featuredCertifications.map((certificate: CertificationData, index: number) => (
             <CertificateCard
               key={certificate.id}
               certificate={certificate}
@@ -316,7 +204,7 @@ export default function Certificates() {
             <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400/70 to-transparent" />
           </a>
           <p className="text-gray-400 font-mono text-sm mt-4">
-            Explore {certificates.length - featuredCertificates.length}+ more professional certifications
+            Explore {allCertifications.length - featuredCertifications.length}+ more professional certifications
           </p>
         </motion.div>
       </div>
