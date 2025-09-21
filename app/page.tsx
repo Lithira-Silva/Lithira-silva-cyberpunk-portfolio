@@ -5,6 +5,7 @@ import Projects from '@/components/Projects'
 import Certificates from '@/components/Certificates'
 import Skills from '@/components/Skills'
 import Contact from '@/components/Contact'
+import Footer from '@/components/Footer'
 import FloatingResumeButton from '@/components/FloatingResumeButton'
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <Certificates />
       <Skills />
       <Contact />
+      <Footer />
     </main>
   )
 }

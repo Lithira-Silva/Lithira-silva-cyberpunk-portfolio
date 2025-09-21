@@ -415,19 +415,6 @@ export default function Contact() {
             </div>
           </motion.div>
         </div>
-
-        {/* Footer */}
-        <motion.footer
-          className="mt-20 pt-8 border-t border-gray-800 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <p className="text-gray-400 font-mono text-sm">
-            © 2025 Lithira Silva | Built with Next.js & Love | 
-            <span className="text-cyan-400 ml-1">Architecting Tomorrow's Code</span>
-          </p>
-        </motion.footer>
       </div>
     </section>
   )

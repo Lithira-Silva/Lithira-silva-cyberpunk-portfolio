@@ -258,7 +258,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       }}
     >
       {/* Project Image */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-48 overflow-hidden sm:h-52 md:h-48">
         <Image
           src={project.image}
           alt={project.title}
@@ -268,8 +268,8 @@ function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
         
         {/* Status Badge */}
-        <div className="absolute top-4 left-4">
-          <span className={`px-3 py-1 text-xs font-mono rounded-full border ${
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4">
+          <span className={`px-2 py-1 text-xs font-mono rounded-full border sm:px-3 ${
             project.status === 'Live' 
               ? 'bg-green-500/20 border-green-500 text-green-400'
               : 'bg-yellow-500/20 border-yellow-500 text-yellow-400'
@@ -280,8 +280,8 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 
         {/* Featured Badge */}
         {project.featured && (
-          <div className="absolute top-4 right-4">
-            <Star className="w-5 h-5 text-cyan-400 fill-cyan-400" />
+          <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
+            <Star className="w-4 h-4 text-cyan-400 fill-cyan-400 sm:w-5 sm:h-5" />
           </div>
         )}
 
@@ -291,23 +291,23 @@ function ProjectCard({ project, index }: ProjectCardProps) {
             href={project.links.live}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-12 h-12 text-black transition-colors duration-300 rounded-full bg-cyan-400 hover:bg-cyan-300"
+            className="flex items-center justify-center w-12 h-12 text-black transition-colors duration-300 rounded-full bg-cyan-400 hover:bg-cyan-300 sm:w-14 sm:h-14"
           >
-            <ExternalLink size={20} />
+            <ExternalLink size={20} className="sm:w-6 sm:h-6" />
           </a>
           <a
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-12 h-12 text-black transition-colors duration-300 bg-white rounded-full hover:bg-gray-200"
+            className="flex items-center justify-center w-12 h-12 text-black transition-colors duration-300 bg-white rounded-full hover:bg-gray-200 sm:w-14 sm:h-14"
           >
-            <Github size={20} />
+            <Github size={20} className="sm:w-6 sm:h-6" />
           </a>
         </div>
       </div>
 
       {/* Project Content */}
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <div className="flex items-center justify-between mb-3">
           <span className="px-2 py-1 font-mono text-xs rounded text-cyan-400 bg-cyan-400/10">
             {project.category}
@@ -318,7 +318,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           </span>
         </div>
 
-        <h3 className="mb-3 text-xl font-bold text-white transition-colors duration-300 font-orbitron group-hover:text-cyan-400">
+        <h3 className="mb-3 text-lg font-bold text-white transition-colors duration-300 font-orbitron group-hover:text-cyan-400 sm:text-xl">
           {project.title}
         </h3>
 
@@ -327,7 +327,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
         </p>
 
         {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-1.5 mb-4 sm:gap-2">
           {project.technologies.slice(0, 4).map((tech) => (
             <span
               key={tech}
@@ -391,7 +391,7 @@ export default function AllProjectsShowcase() {
   return (
     <div className="min-h-screen pt-20 bg-black lg:pt-16">
       {/* Header */}
-      <div className="py-12 section-padding lg:py-16">
+      <div className="py-8 section-padding md:py-12 lg:py-16">
         <div className="container-max">
           <motion.div
             className="flex items-center mb-8"
@@ -409,16 +409,16 @@ export default function AllProjectsShowcase() {
           </motion.div>
 
           <motion.div
-            className="mb-12 text-center"
+            className="mb-8 text-center md:mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="mb-6 text-4xl font-black text-white font-orbitron md:text-5xl lg:text-6xl">
+            <h1 className="mb-4 text-3xl font-black text-white font-orbitron sm:text-4xl md:text-5xl lg:text-6xl">
               All <span className="text-cyan-400">Projects</span>
             </h1>
-            <div className="w-24 h-1 mx-auto mb-6 bg-cyan-400"></div>
-            <p className="max-w-3xl mx-auto font-mono text-lg leading-relaxed text-gray-300">
+            <div className="w-16 h-1 mx-auto mb-4 bg-cyan-400 sm:w-24 md:mb-6"></div>
+            <p className="max-w-3xl mx-auto font-mono text-base leading-relaxed text-gray-300 sm:text-lg">
               Explore my complete portfolio of {allProjects.length} innovative projects spanning AI/ML, 
               full-stack development, data science, and emerging technologies.
             </p>
@@ -426,14 +426,14 @@ export default function AllProjectsShowcase() {
 
           {/* Search and Filters */}
           <motion.div
-            className="mb-12"
+            className="mb-8 md:mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
+            <div className="flex flex-col items-stretch justify-between gap-4 sm:flex-row sm:items-center lg:flex-row">
               {/* Search */}
-              <div className="relative w-full lg:w-96">
+              <div className="relative w-full sm:w-auto lg:w-96">
                 <Search className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" size={20} />
                 <input
                   type="text"
@@ -447,7 +447,7 @@ export default function AllProjectsShowcase() {
               {/* Filter Toggle */}
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center px-4 py-3 text-white transition-colors duration-300 bg-gray-900 border border-gray-700 rounded-lg hover:border-cyan-400"
+                className="flex items-center justify-center w-full px-4 py-3 text-white transition-colors duration-300 bg-gray-900 border border-gray-700 rounded-lg sm:w-auto hover:border-cyan-400"
               >
                 <Filter size={20} className="mr-2" />
                 Filters
@@ -458,13 +458,13 @@ export default function AllProjectsShowcase() {
             <AnimatePresence>
               {showFilters && (
                 <motion.div
-                  className="p-6 mt-6 bg-gray-900 border border-gray-700 rounded-lg"
+                  className="p-4 mt-6 bg-gray-900 border border-gray-700 rounded-lg md:p-6"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
                     {/* Category Filter */}
                     <div>
                       <label className="block mb-3 font-mono text-sm text-gray-400">Category</label>
@@ -473,7 +473,7 @@ export default function AllProjectsShowcase() {
                           <button
                             key={category}
                             onClick={() => setSelectedCategory(category)}
-                            className={`px-3 py-1 text-sm font-mono rounded transition-colors duration-300 ${
+                            className={`px-3 py-2 text-sm font-mono rounded transition-colors duration-300 min-h-[44px] ${
                               selectedCategory === category
                                 ? 'bg-cyan-400 text-black'
                                 : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
@@ -493,7 +493,7 @@ export default function AllProjectsShowcase() {
                           <button
                             key={year}
                             onClick={() => setSelectedYear(year)}
-                            className={`px-3 py-1 text-sm font-mono rounded transition-colors duration-300 ${
+                            className={`px-3 py-2 text-sm font-mono rounded transition-colors duration-300 min-h-[44px] ${
                               selectedYear === year
                                 ? 'bg-cyan-400 text-black'
                                 : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
@@ -523,7 +523,7 @@ export default function AllProjectsShowcase() {
           </motion.div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-8">
             {filteredProjects.map((project, index) => (
               <ProjectCard
                 key={project.id}
