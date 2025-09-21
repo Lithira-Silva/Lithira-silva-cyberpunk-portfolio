@@ -80,8 +80,8 @@ export default function Header() {
   const handleDownloadResume = () => {
     // Create a link to download the resume
     const link = document.createElement('a')
-    link.href = '/resume/Lithira-Silva-Resume.pdf' // You'll need to add your resume PDF to public/resume/
-    link.download = 'Lithira-Silva-Resume.pdf'
+    link.href = '/resume/Lithira Silva  - CV Original.pdf'
+    link.download = 'Lithira-Silva-CV.pdf'
     link.target = '_blank'
     document.body.appendChild(link)
     link.click()

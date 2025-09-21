@@ -5,9 +5,9 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const skills = [
-  'React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Django',
-  'TensorFlow', 'PyTorch', 'AWS Lambda', 'Docker', 'Kubernetes',
-  'GraphQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch'
+  'JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js', 'HTML5',
+  'CSS3', 'Tailwind CSS', 'Java', 'Python', 'C++', 'MySQL',
+  'MongoDB', 'Git', 'GitHub', 'Android Development'
 ]
 
 const achievements = [
@@ -263,33 +263,41 @@ export default function About() {
           <div className="w-24 h-1 bg-cyan-400 mx-auto"></div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Profile Image */}
           <motion.div
-            className="relative"
+            className="relative order-2 lg:order-1"
             initial={{ opacity: 0, x: -50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative w-80 h-80 mx-auto lg:mx-0">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-full blur-lg opacity-20"></div>
-              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-cyan-400 group">
+            <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto">
+              {/* Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-full blur-2xl opacity-20 animate-pulse"></div>
+              
+              {/* Main Image Container */}
+              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-cyan-400 group shadow-2xl">
                 <Image
                   src="/profile.jpg"
                   alt="Lithira Silva - IT Student & Full-Stack Developer"
                   fill
-                  sizes="(max-width: 768px) 320px, 320px"
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 384px"
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500 hover:scale-110"
                   priority
                 />
-                <div className="absolute inset-0 bg-cyan-400 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Glass Shine Effect */}
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-60 rounded-full"></div>
               </div>
             </div>
           </motion.div>
 
           {/* Bio Content */}
           <motion.div
-            className="space-y-8"
+            className="space-y-8 order-1 lg:order-2"
             initial={{ opacity: 0, x: 50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}

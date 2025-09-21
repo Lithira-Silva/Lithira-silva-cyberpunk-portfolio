@@ -259,8 +259,8 @@ const Footer = () => {
 
               {/* Resume Download */}
               <motion.a
-                href="/resume/lithira-silva-resume.pdf"
-                download
+                href="/resume/Lithira Silva  - CV Original.pdf"
+                download="Lithira-Silva-CV.pdf"
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 text-black px-4 py-3 rounded-lg font-mono font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-400/25 mb-6"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
