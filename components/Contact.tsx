@@ -3,6 +3,13 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Send, Github, Linkedin, Twitter, Mail, CheckCircle, AlertCircle } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+import Notification from './Notification'
+
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_pz0flvp'
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_uwwv9z5'
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '9TOl-Wl_HYP3dnY6K'
 
 interface FormData {
   name: string
@@ -19,6 +26,13 @@ interface FormErrors {
 interface FormStatus {
   type: 'idle' | 'loading' | 'success' | 'error'
   message?: string
+}
+
+interface NotificationState {
+  isVisible: boolean
+  type: 'success' | 'error'
+  title: string
+  message: string
 }
 
 function validateEmail(email: string): boolean {
@@ -86,14 +100,28 @@ function ContactForm() {
   })
   const [errors, setErrors] = useState<FormErrors>({})
   const [status, setStatus] = useState<FormStatus>({ type: 'idle' })
+  const [notification, setNotification] = useState<NotificationState>({
+    isVisible: false,
+    type: 'success',
+    title: '',
+    message: ''
+  })
+  const formRef = useRef<HTMLFormElement>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    
+    // Map EmailJS field names to our form data keys
+    let dataKey: keyof FormData
+    if (name === 'user_name') dataKey = 'name'
+    else if (name === 'user_email') dataKey = 'email'
+    else dataKey = name as keyof FormData
+    
+    setFormData(prev => ({ ...prev, [dataKey]: value }))
     
     // Clear error when user starts typing
-    if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }))
+    if (errors[dataKey]) {
+      setErrors(prev => ({ ...prev, [dataKey]: undefined }))
     }
   }
 
@@ -110,24 +138,49 @@ function ContactForm() {
     setErrors({})
 
     try {
-      // Simulate API call - replace with actual form submission
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // Initialize EmailJS
+      emailjs.init(EMAILJS_PUBLIC_KEY)
       
-      setStatus({
-        type: 'success',
-        message: 'Thank you for your message! I\'ll get back to you within 24 hours.'
-      })
+      // Send email using EmailJS
+      const result = await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current!,
+        EMAILJS_PUBLIC_KEY
+      )
+
+      console.log('Email sent successfully:', result.text)
+      
+      setStatus({ type: 'success' })
       setFormData({ name: '', email: '', message: '' })
+      
+      // Show success notification
+      setNotification({
+        isVisible: true,
+        type: 'success',
+        title: 'Message Sent Successfully!',
+        message: 'Your message has been transmitted to the mainframe. I\'ll respond within 24 hours!'
+      })
     } catch (error) {
-      setStatus({
+      console.error('EmailJS error:', error)
+      setStatus({ type: 'error' })
+      
+      // Show error notification
+      setNotification({
+        isVisible: true,
         type: 'error',
-        message: 'Something went wrong. Please try again or contact me directly via email.'
+        title: 'Transmission Failed',
+        message: 'System malfunction detected. Please try again or contact me directly via social media.'
       })
     }
   }
 
+  const closeNotification = () => {
+    setNotification(prev => ({ ...prev, isVisible: false }))
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
       {/* Name Field */}
       <div>
         <label htmlFor="name" className="block text-sm font-mono text-gray-300 mb-2">
@@ -136,7 +189,7 @@ function ContactForm() {
         <input
           type="text"
           id="name"
-          name="name"
+          name="user_name"
           value={formData.name}
           onChange={handleChange}
           className={`w-full px-4 py-3 rounded-lg font-mono text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent ${
@@ -165,7 +218,7 @@ function ContactForm() {
         <input
           type="email"
           id="email"
-          name="email"
+          name="user_email"
           value={formData.email}
           onChange={handleChange}
           className={`w-full px-4 py-3 rounded-lg font-mono text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent ${
@@ -236,25 +289,15 @@ function ContactForm() {
         )}
       </motion.button>
 
-      {/* Status Messages */}
-      {status.message && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`flex items-center p-4 rounded-lg font-mono text-sm ${
-            status.type === 'success'
-              ? 'bg-green-900/50 border border-green-700 text-green-300'
-              : 'bg-red-900/50 border border-red-700 text-red-300'
-          }`}
-        >
-          {status.type === 'success' ? (
-            <CheckCircle size={20} className="mr-2 flex-shrink-0" />
-          ) : (
-            <AlertCircle size={20} className="mr-2 flex-shrink-0" />
-          )}
-          {status.message}
-        </motion.div>
-      )}
+      {/* Notification Component */}
+      <Notification
+        isVisible={notification.isVisible}
+        type={notification.type}
+        title={notification.title}
+        message={notification.message}
+        onClose={closeNotification}
+        duration={6000}
+      />
     </form>
   )
 }
