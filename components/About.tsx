@@ -15,19 +15,22 @@ const achievements = [
     year: '2023-Present',
     title: 'BSc (Hons) in Information Technology',
     company: 'SLIIT, Malabe',
-    description: 'Specializing in Information Technology. Currently in Year 3, Semester 1. Focus on Software Engineering, Full-Stack Development, and Cloud Computing'
+    description: 'Specializing in Information Technology. Currently in Year 3, Semester 1. Focus on Software Engineering, Full-Stack Development, and Cloud Computing',
+    logo: '/education-logos/sliit-logo.png' // SLIIT logo added
   },
   {
     year: '2022-2023',
     title: 'G.C.E. Advanced Level - Commerce Stream',
     company: 'D. S. Senanayake College, Colombo',
-    description: 'Completed Advanced Level in Commerce Stream (English Medium). Passed subjects: Accounting, Economics, and ICT with strong performance'
+    description: 'Completed Advanced Level in Commerce Stream (English Medium). Passed subjects: Accounting, Economics, and ICT with strong performance',
+    logo: '/education-logos/ds-senanayake-logo.png' // Add your D.S. Senanayake College logo here
   },
   {
     year: '2019',
     title: 'G.C.E. Ordinary Level',
     company: 'I-GATE College, Thalawathugoda',
-    description: 'Successfully completed General Certificate of Education Ordinary Level. Built strong foundation in core subjects and analytical thinking'
+    description: 'Successfully completed General Certificate of Education Ordinary Level. Built strong foundation in core subjects and analytical thinking',
+    logo: '/education-logos/igate-logo.jpeg' // I-GATE College logo added
   }
 ]
 
@@ -80,12 +83,27 @@ function AnimatedTimeline() {
                 {achievement.year}
               </div>
               
+              {/* Institution Logo */}
+              <div className="absolute -top-4 right-8 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-cyan-400/30 shadow-lg z-10">
+                <Image
+                  src={achievement.logo}
+                  alt={`${achievement.company} logo`}
+                  width={32}
+                  height={32}
+                  className="object-contain rounded-full"
+                  onError={(e) => {
+                    // Hide the logo container if image fails to load
+                    (e.target as HTMLElement).closest('.w-12')?.classList.add('hidden')
+                  }}
+                />
+              </div>
+              
               {/* Content */}
               <div className="mt-8 space-y-4">
                 <h4 className="font-orbitron font-bold text-xl text-white leading-tight group-hover:text-cyan-400 transition-colors duration-300">
                   {achievement.title}
                 </h4>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
                   <p className="text-cyan-400 font-mono text-base font-medium">
                     {achievement.company}
@@ -119,7 +137,7 @@ function AnimatedTimeline() {
             
             {/* Content Card */}
             <div 
-              className="ml-6 p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]"
+              className="ml-6 p-6 rounded-xl transition-all duration-300 hover:scale-[1.02] relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.9) 0%, rgba(0, 255, 255, 0.06) 30%, rgba(15, 15, 15, 0.9) 100%)',
                 backdropFilter: 'blur(15px) saturate(140%)',
@@ -128,12 +146,27 @@ function AnimatedTimeline() {
                 boxShadow: '0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
               }}
             >
+              {/* Institution Logo - Mobile */}
+              <div className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-cyan-400/30 shadow-lg">
+                <Image
+                  src={achievement.logo}
+                  alt={`${achievement.company} logo`}
+                  width={24}
+                  height={24}
+                  className="object-contain rounded-full"
+                  onError={(e) => {
+                    // Hide the logo container if image fails to load
+                    (e.target as HTMLElement).closest('.w-10')?.classList.add('hidden')
+                  }}
+                />
+              </div>
+              
               {/* Year Badge */}
               <span className="inline-block bg-gradient-to-r from-cyan-400 to-cyan-500 text-black px-4 py-2 rounded-full text-sm font-mono font-bold mb-4 shadow-lg whitespace-nowrap">
                 {achievement.year}
               </span>
               
-              <h4 className="font-orbitron font-bold text-lg text-white mb-3 leading-tight">
+              <h4 className="font-orbitron font-bold text-lg text-white mb-3 leading-tight pr-12">
                 {achievement.title}
               </h4>
               
