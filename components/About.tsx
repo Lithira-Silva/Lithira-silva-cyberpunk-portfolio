@@ -59,85 +59,123 @@ function AnimatedTimeline() {
 
   return (
     <div ref={timelineRef} className="w-full">
-      {/* Desktop Layout - Horizontal Timeline */}
-      <div className="hidden lg:block overflow-x-auto pb-6">
-        <div className="flex space-x-8 min-w-max px-4 pt-8">
+      {/* Desktop - Cool Horizontal Timeline */}
+      <div className="hidden lg:block relative">
+        {/* Timeline Line - Reduced brightness */}
+        <div className="absolute top-24 left-8 right-8 h-0.5 bg-gradient-to-r from-cyan-400/10 via-cyan-400/40 to-cyan-400/10 rounded-full shadow-sm">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 blur-sm rounded-full"></div>
+        </div>
+        
+        {/* Timeline Dots - Smaller and less bright */}
+        {achievements.map((_, index) => (
+          <div
+            key={`dot-${index}`}
+            className="absolute top-[5.75rem] w-4 h-4 bg-gradient-to-br from-cyan-400/80 to-cyan-500/80 rounded-full shadow-md border-2 border-black z-20"
+            style={{ 
+              left: `${8 + (index * (100 - 16) / (achievements.length - 1))}%`,
+              boxShadow: '0 0 8px rgba(0, 255, 255, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.2)'
+            }}
+          >
+            <div className="absolute inset-0.5 bg-gradient-to-br from-cyan-300/60 to-cyan-600/60 rounded-full"></div>
+          </div>
+        ))}
+        
+        {/* Education Cards */}
+        <div className="flex justify-between items-start pt-16 pb-8 px-8">
           {achievements.map((achievement, index) => (
             <motion.div
               key={index}
               data-index={index}
-              className="flex-shrink-0 w-96 rounded-xl p-8 relative transition-all duration-500 hover:scale-105 hover:shadow-2xl group"
-              style={{
-                background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.9) 0%, rgba(0, 255, 255, 0.08) 30%, rgba(15, 15, 15, 0.9) 100%)',
-                backdropFilter: 'blur(20px) saturate(150%)',
-                WebkitBackdropFilter: 'blur(20px) saturate(150%)',
-                border: '1px solid rgba(0, 255, 255, 0.2)',
-                boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 255, 255, 0.1)'
-              }}
+              className="relative w-80 group"
               initial={{ opacity: 0, y: 50 }}
               animate={visibleItems.includes(index) ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: index * 0.15 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
             >
-              {/* Year Badge - Fixed positioning */}
-              <div className="absolute -top-6 left-8 bg-gradient-to-r from-cyan-400 to-cyan-500 text-black px-6 py-3 rounded-full text-base font-mono font-bold shadow-lg z-10 whitespace-nowrap">
-                {achievement.year}
-              </div>
+              {/* Timeline Connector Line - Reduced brightness */}
+              <div className="absolute top-8 left-1/2 w-0.5 h-16 bg-gradient-to-b from-cyan-400/40 to-transparent transform -translate-x-1/2"></div>
               
-              {/* Institution Logo */}
-              <div className="absolute -top-4 right-8 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-cyan-400/30 shadow-lg z-10">
-                <Image
-                  src={achievement.logo}
-                  alt={`${achievement.company} logo`}
-                  width={32}
-                  height={32}
-                  className="object-contain rounded-full"
-                  onError={(e) => {
-                    // Hide the logo container if image fails to load
-                    (e.target as HTMLElement).closest('.w-12')?.classList.add('hidden')
-                  }}
-                />
-              </div>
-              
-              {/* Content */}
-              <div className="mt-8 space-y-4">
-                <h4 className="font-orbitron font-bold text-xl text-white leading-tight group-hover:text-cyan-400 transition-colors duration-300">
-                  {achievement.title}
-                </h4>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                  <p className="text-cyan-400 font-mono text-base font-medium">
-                    {achievement.company}
+              {/* Education Card */}
+              <div 
+                className={`relative mt-24 p-8 rounded-2xl transition-all duration-500 hover:scale-105 hover:shadow-2xl group cursor-pointer ${
+                  index % 2 === 0 ? 'transform -translate-y-8' : 'transform translate-y-8'
+                }`}
+                style={{
+                  background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.95) 0%, rgba(0, 255, 255, 0.08) 30%, rgba(15, 15, 15, 0.95) 100%)',
+                  backdropFilter: 'blur(25px) saturate(150%)',
+                  WebkitBackdropFilter: 'blur(25px) saturate(150%)',
+                  border: '1px solid rgba(0, 255, 255, 0.3)',
+                  boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(0, 255, 255, 0.1)'
+                }}
+              >
+                {/* Year Badge */}
+                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-cyan-500 text-black px-6 py-3 rounded-full text-sm font-mono font-bold shadow-xl z-10 whitespace-nowrap">
+                  {achievement.year}
+                </div>
+                
+                {/* Institution Logo */}
+                <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-cyan-400/50 shadow-xl z-10 group-hover:scale-110 transition-transform duration-300">
+                  <Image
+                    src={achievement.logo}
+                    alt={`${achievement.company} logo`}
+                    width={40}
+                    height={40}
+                    className="object-contain rounded-full"
+                    onError={(e) => {
+                      (e.target as HTMLElement).closest('.w-16')?.classList.add('hidden')
+                    }}
+                  />
+                </div>
+                
+                {/* Content */}
+                <div className="space-y-4 pt-4">
+                  <h4 className="font-orbitron font-bold text-xl text-white leading-tight group-hover:text-cyan-400 transition-colors duration-300">
+                    {achievement.title}
+                  </h4>
+                  
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-cyan-400/60 rounded-full"></div>
+                    <p className="text-cyan-400 font-mono text-base font-medium">
+                      {achievement.company}
+                    </p>
+                  </div>
+                  
+                  <p className="text-gray-300 font-mono text-sm leading-relaxed">
+                    {achievement.description}
                   </p>
                 </div>
-                <p className="text-gray-300 font-mono text-sm leading-relaxed">
-                  {achievement.description}
-                </p>
+                
+                {/* Hover Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/5 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
               </div>
-              
-              {/* Hover Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/5 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Mobile/Tablet Layout - Vertical Timeline */}
-      <div className="lg:hidden space-y-6">
+      {/* Mobile/Tablet - Vertical Timeline */}
+      <div className="lg:hidden space-y-8 relative">
+        {/* Vertical Timeline Line - Reduced brightness */}
+        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400/10 via-cyan-400/40 to-cyan-400/10 rounded-full">
+          <div className="absolute inset-0 bg-gradient-to-b from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 blur-sm rounded-full"></div>
+        </div>
+        
         {achievements.map((achievement, index) => (
           <motion.div
             key={index}
             data-index={index}
-            className="relative pl-8 pb-8 border-l-2 border-cyan-400/30 last:border-l-0"
+            className="relative pl-16"
             initial={{ opacity: 0, x: -30 }}
             animate={visibleItems.includes(index) ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+            transition={{ duration: 0.6, delay: index * 0.15 }}
           >
-            {/* Timeline Dot */}
-            <div className="absolute -left-2 top-2 w-4 h-4 bg-cyan-400 rounded-full shadow-lg"></div>
+            {/* Timeline Dot - Smaller and less bright */}
+            <div className="absolute left-4 top-8 w-4 h-4 bg-gradient-to-br from-cyan-400/80 to-cyan-500/80 rounded-full shadow-md border-2 border-black z-10">
+              <div className="absolute inset-0.5 bg-gradient-to-br from-cyan-300/60 to-cyan-600/60 rounded-full"></div>
+            </div>
             
-            {/* Content Card */}
+            {/* Mobile Education Card */}
             <div 
-              className="ml-6 p-6 rounded-xl transition-all duration-300 hover:scale-[1.02] relative"
+              className="p-6 rounded-xl transition-all duration-300 hover:scale-[1.02] relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.9) 0%, rgba(0, 255, 255, 0.06) 30%, rgba(15, 15, 15, 0.9) 100%)',
                 backdropFilter: 'blur(15px) saturate(140%)',
@@ -146,38 +184,35 @@ function AnimatedTimeline() {
                 boxShadow: '0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
               }}
             >
-              {/* Institution Logo - Mobile */}
-              <div className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-cyan-400/30 shadow-lg">
+              {/* Mobile Logo */}
+              <div className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-cyan-400/30 shadow-lg">
                 <Image
                   src={achievement.logo}
                   alt={`${achievement.company} logo`}
-                  width={24}
-                  height={24}
+                  width={28}
+                  height={28}
                   className="object-contain rounded-full"
                   onError={(e) => {
-                    // Hide the logo container if image fails to load
-                    (e.target as HTMLElement).closest('.w-10')?.classList.add('hidden')
+                    (e.target as HTMLElement).closest('.w-12')?.classList.add('hidden')
                   }}
                 />
               </div>
               
               {/* Year Badge */}
-              <span className="inline-block bg-gradient-to-r from-cyan-400 to-cyan-500 text-black px-4 py-2 rounded-full text-sm font-mono font-bold mb-4 shadow-lg whitespace-nowrap">
+              <span className="inline-block bg-gradient-to-r from-cyan-400 to-cyan-500 text-black px-4 py-2 rounded-full text-sm font-mono font-bold mb-4 shadow-lg">
                 {achievement.year}
               </span>
               
-              <h4 className="font-orbitron font-bold text-lg text-white mb-3 leading-tight pr-12">
+              <h4 className="font-orbitron font-bold text-lg text-white mb-3 leading-tight pr-14">
                 {achievement.title}
               </h4>
               
-              <div className="flex items-center space-x-2 mb-3">
-                <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>
-                <p className="text-cyan-400 font-mono text-sm font-medium">
-                  {achievement.company}
-                </p>
-              </div>
-              
-              <p className="text-gray-300 font-mono text-sm leading-relaxed">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <div className="w-1.5 h-1.5 bg-cyan-400/60 rounded-full"></div>
+                    <p className="text-cyan-400 font-mono text-sm font-medium">
+                      {achievement.company}
+                    </p>
+                  </div>              <p className="text-gray-300 font-mono text-sm leading-relaxed">
                 {achievement.description}
               </p>
             </div>
