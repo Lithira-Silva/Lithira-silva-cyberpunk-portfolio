@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, Github, Users, Zap, TrendingUp } from 'lucide-react'
+import { ExternalLink, Github, Users, Zap, TrendingUp, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import { featuredProjects, type ProjectData } from '@/lib/projectData'
 
@@ -14,6 +14,7 @@ interface ProjectCardProps {
 
 function ProjectCard({ project, index, isVisible }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false)
+  const [showAllTechnologies, setShowAllTechnologies] = useState(false)
 
   return (
     <motion.div
@@ -44,58 +45,51 @@ function ProjectCard({ project, index, isVisible }: ProjectCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
         
+        {/* Enhanced visibility overlay for light images */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-black/40"></div>
+        
         {/* Hover Overlay */}
         <motion.div
           className="absolute inset-0 bg-cyan-400 flex items-center justify-center"
           initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 0.1 : 0 }}
+          animate={{ opacity: isHovered ? 0.03 : 0 }}
           transition={{ duration: 0.3 }}
         />
-        
-        {/* Action Buttons */}
-        <motion.div
-          className="absolute top-4 right-4 flex space-x-2"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : -20 }}
-          transition={{ duration: 0.3 }}
-        >
-          <a
-            href={project.links.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full flex items-center justify-center text-cyan-400 transition-all duration-300 hover:scale-110"
-            aria-label={`View ${project.title} live demo`}
-            style={{
-              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.8) 100%)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1px solid rgba(0, 255, 255, 0.3)',
-              boxShadow: '0 4px 15px rgba(0, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-            }}
-          >
-            <ExternalLink size={18} />
-          </a>
-          <a
-            href={project.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full flex items-center justify-center text-cyan-400 transition-all duration-300 hover:scale-110"
-            aria-label={`View ${project.title} source code`}
-            style={{
-              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.8) 100%)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1px solid rgba(0, 255, 255, 0.3)',
-              boxShadow: '0 4px 15px rgba(0, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-            }}
-          >
-            <Github size={18} />
-          </a>
-        </motion.div>
       </div>
 
       {/* Project Content */}
       <div className="p-6 flex-1 flex flex-col">
+        {/* Category & Year */}
+        <div className="flex items-center justify-between mb-4 text-xs font-mono">
+          <div className="flex items-center space-x-2">
+            <span 
+              className="px-2 py-1 text-green-300 rounded-full border border-green-400/40 font-semibold"
+              style={{
+                background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(34, 197, 94, 0.1) 100%)',
+                backdropFilter: 'blur(8px) saturate(150%)',
+                WebkitBackdropFilter: 'blur(8px) saturate(150%)',
+                boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+              }}
+            >
+              Live
+            </span>
+            <span 
+              className="px-3 py-1 bg-cyan-400/15 text-cyan-400 rounded-full border border-cyan-400/30"
+              style={{
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                boxShadow: '0 2px 8px rgba(0, 255, 255, 0.15)'
+              }}
+            >
+              {project.category}
+            </span>
+          </div>
+          <span className="text-gray-400 flex items-center">
+            <Calendar size={12} className="mr-1" />
+            {project.year}
+          </span>
+        </div>
+
         <h3 className="font-orbitron font-bold text-xl text-white mb-3 line-clamp-2">
           {project.title}
         </h3>
@@ -104,13 +98,67 @@ function ProjectCard({ project, index, isVisible }: ProjectCardProps) {
           {project.description}
         </p>
 
-        {/* Technologies */}
+        {/* Technologies with Expansion */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech) => (
+          {(showAllTechnologies ? project.technologies : project.technologies.slice(0, 4)).map((tech) => (
             <span key={tech} className="tech-badge text-xs">
               {tech}
             </span>
           ))}
+          {project.technologies.length > 4 && (
+            <button
+              onClick={() => setShowAllTechnologies(!showAllTechnologies)}
+              className="px-3 py-1 text-xs text-cyan-400 rounded-full font-mono hover:text-cyan-300 hover:bg-cyan-400/10 transition-all duration-300 border border-cyan-400/30"
+              style={{
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                boxShadow: '0 2px 8px rgba(0, 255, 255, 0.15)'
+              }}
+            >
+              {showAllTechnologies 
+                ? 'Show less' 
+                : `+${project.technologies.length - 4} more`
+              }
+            </button>
+          )}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex space-x-3 pt-2">
+          <a
+            href={project.links.liveHost}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center px-4 py-3 rounded-lg font-mono text-sm font-medium text-white transition-all duration-300 hover:scale-105 group/btn"
+            aria-label={`View ${project.title} live hosted application`}
+            style={{
+              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 255, 255, 0.1) 100%)',
+              backdropFilter: 'blur(12px) saturate(150%)',
+              WebkitBackdropFilter: 'blur(12px) saturate(150%)',
+              border: '1px solid rgba(0, 255, 255, 0.4)',
+              boxShadow: '0 4px 15px rgba(0, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
+          >
+            <ExternalLink size={16} className="mr-2" />
+            View Live
+          </a>
+          <a
+            href={project.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center px-4 py-3 rounded-lg font-mono text-sm font-medium text-white transition-all duration-300 hover:scale-105 group/btn"
+            aria-label={`View ${project.title} source code repository`}
+            style={{
+              background: 'linear-gradient(135deg, rgba(115, 115, 115, 0.15) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(115, 115, 115, 0.1) 100%)',
+              backdropFilter: 'blur(12px) saturate(150%)',
+              WebkitBackdropFilter: 'blur(12px) saturate(150%)',
+              border: '1px solid rgba(115, 115, 115, 0.4)',
+              boxShadow: '0 4px 15px rgba(115, 115, 115, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
+          >
+            <Github size={16} className="mr-2" />
+            GitHub
+          </a>
         </div>
       </div>
     </motion.div>

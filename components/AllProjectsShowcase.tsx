@@ -38,52 +38,30 @@ function ProjectCard({ project, index }: ProjectCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
         
-        {/* Status Badge */}
-        <div className="absolute top-3 left-3">
-          <span
-            className={`px-2 py-1 text-xs font-mono rounded-full ${
-              project.status === 'Live'
-                ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-            }`}
-          >
-            {project.status}
-          </span>
-        </div>
-
-        {/* Action Buttons */}
-        <motion.div
-          className="absolute top-3 right-3 flex space-x-2"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.8 }}
-          transition={{ duration: 0.2 }}
-        >
-          <a
-            href={project.links.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 bg-black/60 backdrop-blur-sm border border-cyan-400/30 rounded-full text-cyan-400 hover:bg-cyan-400/20 transition-colors"
-          >
-            <ExternalLink size={14} />
-          </a>
-          <a
-            href={project.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 bg-black/60 backdrop-blur-sm border border-cyan-400/30 rounded-full text-cyan-400 hover:bg-cyan-400/20 transition-colors"
-          >
-            <Github size={14} />
-          </a>
-        </motion.div>
+        {/* Enhanced visibility overlay for light images */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-black/40"></div>
       </div>
 
       {/* Project Content */}
       <div className="p-4 md:p-6">
         {/* Category & Year */}
         <div className="flex items-center justify-between mb-3 text-xs font-mono">
-          <span className="px-2 py-1 bg-cyan-400/10 text-cyan-400 rounded">
-            {project.category}
-          </span>
+          <div className="flex items-center space-x-2">
+            <span 
+              className="px-2 py-1 text-green-300 rounded-full border border-green-400/40 font-semibold"
+              style={{
+                background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(34, 197, 94, 0.08) 100%)',
+                backdropFilter: 'blur(6px) saturate(140%)',
+                WebkitBackdropFilter: 'blur(6px) saturate(140%)',
+                boxShadow: '0 2px 6px rgba(34, 197, 94, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+              }}
+            >
+              Live
+            </span>
+            <span className="px-2 py-1 bg-cyan-400/10 text-cyan-400 rounded">
+              {project.category}
+            </span>
+          </div>
           <span className="text-gray-400 flex items-center">
             <Calendar size={12} className="mr-1" />
             {project.year}
@@ -121,6 +99,44 @@ function ProjectCard({ project, index }: ProjectCardProps) {
               }
             </button>
           )}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex space-x-2 pt-2">
+          <a
+            href={project.links.liveHost}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center px-3 py-2 rounded-lg font-mono text-xs font-medium text-white transition-all duration-300 hover:scale-105"
+            aria-label={`View ${project.title} live hosted application`}
+            style={{
+              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 255, 255, 0.08) 100%)',
+              backdropFilter: 'blur(10px) saturate(140%)',
+              WebkitBackdropFilter: 'blur(10px) saturate(140%)',
+              border: '1px solid rgba(0, 255, 255, 0.3)',
+              boxShadow: '0 3px 10px rgba(0, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
+          >
+            <ExternalLink size={14} className="mr-1" />
+            Live
+          </a>
+          <a
+            href={project.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center px-3 py-2 rounded-lg font-mono text-xs font-medium text-white transition-all duration-300 hover:scale-105"
+            aria-label={`View ${project.title} source code repository`}
+            style={{
+              background: 'linear-gradient(135deg, rgba(115, 115, 115, 0.12) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(115, 115, 115, 0.08) 100%)',
+              backdropFilter: 'blur(10px) saturate(140%)',
+              WebkitBackdropFilter: 'blur(10px) saturate(140%)',
+              border: '1px solid rgba(115, 115, 115, 0.3)',
+              boxShadow: '0 3px 10px rgba(115, 115, 115, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
+          >
+            <Github size={14} className="mr-1" />
+            Code
+          </a>
         </div>
       </div>
     </motion.div>

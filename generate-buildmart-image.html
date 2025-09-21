@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate BuildMart Hero Image</title>
+</head>
+<body>
+    <canvas id="canvas" width="1200" height="800" style="border: 1px solid #ccc;"></canvas>
+    <br>
+    <button onclick="downloadImage()">Download BuildMart Image</button>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Create BuildMart themed image
+        function createBuildMartImage() {
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 1200, 800);
+            gradient.addColorStop(0, '#000000');
+            gradient.addColorStop(0.5, '#0a0a0a');
+            gradient.addColorStop(1, '#1a1a1a');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1200, 800);
+            
+            // Add grid pattern
+            ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 1200; i += 50) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, 800);
+                ctx.stroke();
+            }
+            for (let i = 0; i < 800; i += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(1200, i);
+                ctx.stroke();
+            }
+            
+            // Main title
+            ctx.fillStyle = '#00ffff';
+            ctx.font = 'bold 72px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('BuildMart', 600, 200);
+            
+            // Subtitle
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '32px Arial';
+            ctx.fillText('Construction Management System', 600, 260);
+            
+            // Feature boxes
+            const features = [
+                'Project Tracking',
+                'Bidding System',
+                'Financial Dashboard',
+                'Resource Management'
+            ];
+            
+            features.forEach((feature, index) => {
+                const x = 150 + (index % 2) * 500;
+                const y = 350 + Math.floor(index / 2) * 150;
+                
+                // Box background
+                ctx.fillStyle = 'rgba(0, 255, 255, 0.1)';
+                ctx.fillRect(x, y, 200, 100);
+                
+                // Box border
+                ctx.strokeStyle = '#00ffff';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(x, y, 200, 100);
+                
+                // Feature text
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '18px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(feature, x + 100, y + 55);
+            });
+            
+            // Add some tech elements
+            ctx.fillStyle = 'rgba(0, 255, 255, 0.3)';
+            ctx.font = '12px monospace';
+            ctx.textAlign = 'left';
+            ctx.fillText('React.js • Node.js • MongoDB • Material-UI', 50, 750);
+            
+            // Add construction icon (simple representation)
+            ctx.strokeStyle = '#00ffff';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(1000, 400);
+            ctx.lineTo(1100, 300);
+            ctx.lineTo(1150, 350);
+            ctx.lineTo(1050, 450);
+            ctx.closePath();
+            ctx.stroke();
+        }
+        
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'buildmart-hero.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
+            link.click();
+        }
+        
+        // Generate the image when page loads
+        createBuildMartImage();
+    </script>
+</body>
+</html>

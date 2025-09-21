@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildMart Dashboard Mockup - Screenshot Ready</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #000000;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        .dashboard {
+            width: 1200px;
+            height: 800px;
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            height: 80px;
+            background: rgba(0, 255, 255, 0.1);
+            border-bottom: 1px solid #00ffff;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 32px;
+            font-weight: 900;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .nav {
+            margin-left: auto;
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-item {
+            color: #ffffff;
+            font-size: 14px;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-item.active {
+            color: #00ffff;
+            opacity: 1;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .widget {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+        }
+        
+        .widget-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            color: #00ffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        /* Project Progress */
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ffff, #00e5ff);
+            border-radius: 4px;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        /* Bidding Interface */
+        .bid-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .bid-company {
+            font-size: 14px;
+            color: #ffffff;
+        }
+        
+        .bid-amount {
+            font-size: 16px;
+            color: #00ffff;
+            font-weight: 600;
+        }
+        
+        /* Financial Chart */
+        .chart {
+            height: 150px;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 255, 0.1) 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(45deg, transparent 30%, #00ffff 50%, transparent 70%);
+            opacity: 0.3;
+        }
+        
+        /* Timeline */
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: #00ffff;
+            border-radius: 50%;
+            margin-right: 15px;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .timeline-text {
+            font-size: 14px;
+            color: #ffffff;
+        }
+        
+        /* Background Elements */
+        .bg-construction {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(0, 255, 255, 0.05) 100%);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .metrics {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            color: #00ffff;
+            font-weight: 700;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: #ffffff;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="grid-overlay"></div>
+        <div class="bg-construction"></div>
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">BuildMart</div>
+            <div class="nav">
+                <div class="nav-item active">Dashboard</div>
+                <div class="nav-item">Projects</div>
+                <div class="nav-item">Bidding</div>
+                <div class="nav-item">Reports</div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Project Progress Widget -->
+            <div class="widget">
+                <div class="widget-title">Active Projects</div>
+                <div style="margin-bottom: 15px;">
+                    <div style="font-size: 14px; margin-bottom: 5px;">Downtown Plaza Construction</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div style="font-size: 14px; margin-bottom: 5px;">Residential Complex Phase 2</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%;"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size: 14px; margin-bottom: 5px;">Commercial Office Tower</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bidding Interface Widget -->
+            <div class="widget">
+                <div class="widget-title">Active Bids</div>
+                <div class="bid-item">
+                    <div class="bid-company">ABC Construction Co.</div>
+                    <div class="bid-amount">$2.4M</div>
+                </div>
+                <div class="bid-item">
+                    <div class="bid-company">Elite Builders LLC</div>
+                    <div class="bid-amount">$2.1M</div>
+                </div>
+                <div class="bid-item">
+                    <div class="bid-company">Metro Construction</div>
+                    <div class="bid-amount">$2.6M</div>
+                </div>
+                <div class="bid-item">
+                    <div class="bid-company">Premier Contractors</div>
+                    <div class="bid-amount">$2.3M</div>
+                </div>
+            </div>
+            
+            <!-- Financial Overview Widget -->
+            <div class="widget">
+                <div class="widget-title">Financial Overview</div>
+                <div class="chart"></div>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">$12.5M</div>
+                        <div class="metric-label">Total Budget</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$8.7M</div>
+                        <div class="metric-label">Spent</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$3.8M</div>
+                        <div class="metric-label">Remaining</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Timeline Widget -->
+            <div class="widget">
+                <div class="widget-title">Upcoming Milestones</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-text">Foundation Inspection - Dec 15</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-text">Structural Framework - Jan 8</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-text">Electrical Installation - Feb 20</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-text">Final Inspection - Mar 30</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

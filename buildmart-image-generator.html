@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create BuildMart Image</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
+        canvas { border: 1px solid #ccc; margin-bottom: 20px; }
+        button { padding: 10px 20px; font-size: 16px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>BuildMart Image Generator</h1>
+    <canvas id="canvas" width="1200" height="800"></canvas><br>
+    <button onclick="downloadJPG()">Download as JPG</button>
+    <button onclick="downloadPNG()">Download as PNG</button>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function createBuildMartImage() {
+            // Black background
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, 1200, 800);
+            
+            // Grid pattern
+            ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 1200; i += 50) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, 800);
+                ctx.stroke();
+            }
+            for (let i = 0; i < 800; i += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(1200, i);
+                ctx.stroke();
+            }
+            
+            // Main title with glow effect
+            ctx.shadowColor = '#00ffff';
+            ctx.shadowBlur = 20;
+            ctx.fillStyle = '#00ffff';
+            ctx.font = 'bold 72px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('BuildMart', 600, 200);
+            
+            // Reset shadow
+            ctx.shadowBlur = 0;
+            
+            // Subtitle
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '32px Arial';
+            ctx.fillText('Construction Management System', 600, 260);
+            
+            // Feature boxes with gradients
+            const features = [
+                { text: 'Project Tracking', x: 150, y: 350 },
+                { text: 'Bidding System', x: 650, y: 350 },
+                { text: 'Financial Dashboard', x: 150, y: 500 },
+                { text: 'Resource Management', x: 650, y: 500 }
+            ];
+            
+            features.forEach(feature => {
+                // Box gradient background
+                const gradient = ctx.createLinearGradient(feature.x, feature.y, feature.x + 200, feature.y + 100);
+                gradient.addColorStop(0, 'rgba(0, 255, 255, 0.2)');
+                gradient.addColorStop(1, 'rgba(0, 255, 255, 0.05)');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(feature.x, feature.y, 200, 100);
+                
+                // Box border with glow
+                ctx.shadowColor = '#00ffff';
+                ctx.shadowBlur = 10;
+                ctx.strokeStyle = '#00ffff';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(feature.x, feature.y, 200, 100);
+                ctx.shadowBlur = 0;
+                
+                // Feature text
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '18px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(feature.text, feature.x + 100, feature.y + 55);
+            });
+            
+            // Tech stack
+            ctx.fillStyle = 'rgba(0, 255, 255, 0.7)';
+            ctx.font = '14px monospace';
+            ctx.textAlign = 'left';
+            ctx.fillText('React.js • Node.js • MongoDB • Material-UI • JWT • Vercel', 50, 750);
+            
+            // Construction crane icon
+            ctx.strokeStyle = '#00ffff';
+            ctx.lineWidth = 4;
+            ctx.shadowColor = '#00ffff';
+            ctx.shadowBlur = 15;
+            
+            // Crane structure
+            ctx.beginPath();
+            ctx.moveTo(1000, 450);
+            ctx.lineTo(1000, 300);
+            ctx.lineTo(1150, 300);
+            ctx.lineTo(1150, 320);
+            ctx.lineTo(1020, 320);
+            ctx.lineTo(1020, 450);
+            ctx.stroke();
+            
+            // Crane arm
+            ctx.beginPath();
+            ctx.moveTo(1020, 320);
+            ctx.lineTo(1100, 280);
+            ctx.stroke();
+            
+            // Hook
+            ctx.beginPath();
+            ctx.arc(1100, 285, 5, 0, 2 * Math.PI);
+            ctx.stroke();
+            
+            ctx.shadowBlur = 0;
+            
+            // Add some data visualization elements
+            ctx.strokeStyle = 'rgba(0, 255, 255, 0.6)';
+            ctx.lineWidth = 2;
+            
+            // Progress bars
+            for (let i = 0; i < 3; i++) {
+                const y = 650 + i * 25;
+                const width = 150 + Math.random() * 100;
+                
+                // Background bar
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.fillRect(950, y, 200, 15);
+                
+                // Progress bar
+                ctx.fillStyle = '#00ffff';
+                ctx.fillRect(950, y, width, 15);
+            }
+        }
+        
+        function downloadJPG() {
+            const link = document.createElement('a');
+            link.download = 'buildmart-hero.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
+            link.click();
+        }
+        
+        function downloadPNG() {
+            const link = document.createElement('a');
+            link.download = 'buildmart-hero.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Generate the image
+        createBuildMartImage();
+    </script>
+</body>
+</html>

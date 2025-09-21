@@ -67,7 +67,7 @@ This file contains:
     metric2: "value2"
   },
   links: {
-    live: "https://demo.com",
+    liveHost: "https://demo.com",
     github: "https://github.com/user/repo"
   },
   highlights: ["Feature 1", "Feature 2", ...]
@@ -92,8 +92,8 @@ This file contains:
 - ✅ **Professional presentation**: Cyberpunk styling
 
 ### Links & Actions
-- ✅ **Live demo**: Working application URL
-- ✅ **GitHub**: Source code repository
+- ✅ **Live hosted application**: Working application URL
+- ✅ **GitHub repository**: Source code repository
 - ✅ **Consistent actions**: Same buttons on all pages
 
 ### Advanced Features
