@@ -13,20 +13,20 @@
   }
   
   body {
-    @apply bg-black text-white font-mono antialiased;
+    @apply font-mono antialiased text-white bg-black;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     line-height: 1.6;
     letter-spacing: 0.025em;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-orbitron font-bold;
+    @apply font-bold font-orbitron;
     letter-spacing: 0.025em;
   }
 
   /* Selection styling */
   ::selection {
-    @apply bg-cyan-400 text-black;
+    @apply text-black bg-cyan-400;
   }
 
   /* Scrollbar styling */
@@ -58,7 +58,7 @@
   }
 
   .container-max {
-    @apply max-w-7xl mx-auto;
+    @apply mx-auto max-w-7xl;
   }
 
   .text-gradient {
@@ -69,7 +69,7 @@
   }
 
   .glow-button {
-    @apply relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black;
+    @apply relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white transition-all duration-300 rounded-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black;
     background: linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 255, 255, 0.1) 100%);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -85,7 +85,7 @@
   }
 
   .particle {
-    @apply absolute w-1 h-1 bg-cyan-400 rounded-full opacity-60;
+    @apply absolute w-1 h-1 rounded-full bg-cyan-400 opacity-60;
     animation: particle 15s linear infinite;
   }
 
@@ -97,7 +97,7 @@
   }
 
   .tech-badge {
-    @apply inline-flex items-center px-3 py-1 text-xs font-mono text-cyan-400 rounded-full transition-all duration-300 hover:scale-105;
+    @apply inline-flex items-center px-3 py-1 font-mono text-xs transition-all duration-300 rounded-full text-cyan-400 hover:scale-105;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 255, 255, 0.08) 50%, rgba(10, 10, 10, 0.7) 100%);
     backdrop-filter: blur(10px) saturate(130%);
     -webkit-backdrop-filter: blur(10px) saturate(130%);
@@ -112,11 +112,11 @@
   }
 
   .project-card {
-    @apply relative overflow-hidden bg-gray-900 border border-gray-700 rounded-lg transition-all duration-500 hover:border-cyan-400 hover:scale-105;
+    @apply relative overflow-hidden transition-all duration-500 bg-gray-900 border border-gray-700 rounded-lg hover:border-cyan-400 hover:scale-105;
   }
 
   .social-icon {
-    @apply w-12 h-12 flex items-center justify-center text-white rounded-full transition-all duration-300 hover:scale-110;
+    @apply flex items-center justify-center w-12 h-12 text-white transition-all duration-300 rounded-full hover:scale-110;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.8) 100%);
     backdrop-filter: blur(15px) saturate(130%);
     -webkit-backdrop-filter: blur(15px) saturate(130%);

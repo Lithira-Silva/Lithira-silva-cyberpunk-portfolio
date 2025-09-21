@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Send, Github, Linkedin, Twitter, Mail, CheckCircle, AlertCircle } from 'lucide-react'
+import { Send, Github, Linkedin, Mail, CheckCircle, AlertCircle } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 import Notification from './Notification'
 
@@ -77,12 +77,6 @@ const socialLinks = [
     icon: Linkedin,
     url: 'https://www.linkedin.com/in/lithira-silva-20b42a370',
     color: '#0077B5'
-  },
-  {
-    name: 'Twitter',
-    icon: Twitter,
-    url: 'https://twitter.com/lithirasilva',
-    color: '#1DA1F2'
   },
   {
     name: 'Email',

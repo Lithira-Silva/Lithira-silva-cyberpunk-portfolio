@@ -31,12 +31,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Certifications | Lithira Silva - AI Engineer Portfolio',
-    description: 'Professional certifications in cloud computing, AI/ML, and modern development practices.',
-    images: ['https://lithirasilva.dev/og-certificates.jpg'],
-  },
 }
 
 export default function CertificatesPage() {

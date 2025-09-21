@@ -30,12 +30,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Projects | Lithira Silva - AI Engineer Portfolio',
-    description: 'Discover innovative AI-powered projects and scalable full-stack applications.',
-    images: ['https://lithirasilva.dev/og-projects.jpg'],
-  },
 }
 
 export default function ProjectsPage() {

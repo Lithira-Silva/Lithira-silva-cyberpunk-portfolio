@@ -1,4 +1,4 @@
-# 🚀 Lithira Silva Portfolio - Architect of Tomorrow's Code
+# 🚀 LithiraSilva Portfolio - Architect of Tomorrow's Code
 
 A cutting-edge portfolio website built with the latest 2025 web technologies, showcasing a cyberpunk minimalist aesthetic and advanced AI/ML engineering expertise.
 
@@ -297,7 +297,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Email**: lithira@example.com
 - **LinkedIn**: [www.linkedin.com/in/lithira-silva-20b42a370](https://www.linkedin.com/in/lithira-silva-20b42a370)
 - **GitHub**: [github.com/Lithira-Silva](https://github.com/Lithira-Silva)
-- **Twitter**: [@lithirasilva](https://twitter.com/lithirasilva)
 
 ---
 

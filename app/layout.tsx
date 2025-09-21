@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Lithira Silva - Architect of Tomorrow\'s Code',
+  title: 'Lithira Silva Portfolio',
   description: 'Full-Stack AI Engineer crafting intelligent systems that scale. 10+ years experience in Node.js, Python, React, TensorFlow, and AI integrations.',
   keywords: [
     'full-stack developer',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Lithira Silva - Architect of Tomorrow\'s Code',
+    title: 'Lithira Silva Portfolio',
     description: 'Full-Stack AI Engineer crafting intelligent systems that scale.',
     url: 'https://lithirasilva.dev',
     siteName: 'Lithira Silva Portfolio',
@@ -42,13 +42,6 @@ export const metadata: Metadata = {
     ],
     locale: 'en_US',
     type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Lithira Silva - Architect of Tomorrow\'s Code',
-    description: 'Full-Stack AI Engineer crafting intelligent systems that scale.',
-    images: ['/og-image.jpg'],
-    creator: '@lithirasilva',
   },
   robots: {
     index: true,
@@ -107,7 +100,6 @@ export default function RootLayout({
               sameAs: [
                 'https://github.com/Lithira-Silva',
                 'https://www.linkedin.com/in/lithira-silva-20b42a370',
-                'https://twitter.com/lithirasilva',
               ],
               knowsAbout: [
                 'Artificial Intelligence',
