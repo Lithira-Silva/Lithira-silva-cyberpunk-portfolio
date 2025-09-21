@@ -11,7 +11,7 @@ const certificates = [
     title: 'AWS Certified Solutions Architect - Professional',
     issuer: 'Amazon Web Services',
     description: 'Advanced certification demonstrating expertise in designing distributed applications and systems on AWS platform with focus on scalability, security, and cost optimization.',
-    image: '/cert-aws-pro.jpg',
+    image: '/project-1.jpg', // Placeholder - replace with actual certificate image
     credentialId: 'AWS-PSA-2024-001',
     issueDate: '2024',
     expiryDate: '2027',
@@ -25,7 +25,7 @@ const certificates = [
     title: 'Google Cloud Professional Machine Learning Engineer',
     issuer: 'Google Cloud',
     description: 'Professional certification validating skills in designing, building, and productionizing ML models using Google Cloud technologies and best practices.',
-    image: '/cert-gcp-ml.jpg',
+    image: '/project-2.jpg', // Placeholder - replace with actual certificate image
     credentialId: 'GCP-MLE-2024-002',
     issueDate: '2024',
     expiryDate: '2026',
@@ -39,7 +39,7 @@ const certificates = [
     title: 'Microsoft Azure AI Engineer Associate',
     issuer: 'Microsoft',
     description: 'Certification demonstrating proficiency in implementing AI solutions using Azure Cognitive Services, Machine Learning, and Knowledge Mining services.',
-    image: '/cert-azure-ai.jpg',
+    image: '/project-3.jpg', // Placeholder - replace with actual certificate image
     credentialId: 'AZ-AI-2024-003',
     issueDate: '2024',
     expiryDate: '2026',
@@ -53,7 +53,7 @@ const certificates = [
     title: 'Kubernetes Certified Application Developer',
     issuer: 'Cloud Native Computing Foundation',
     description: 'Certification proving ability to design, build and configure cloud native applications for Kubernetes.',
-    image: '/cert-ckad.jpg',
+    image: '/project-4.jpg', // Placeholder - replace with actual certificate image
     credentialId: 'CKAD-2024-004',
     issueDate: '2024',
     expiryDate: '2027',
@@ -67,7 +67,7 @@ const certificates = [
     title: 'TensorFlow Developer Certificate',
     issuer: 'TensorFlow',
     description: 'Google certification program demonstrating proficiency in using TensorFlow to solve deep learning and ML problems.',
-    image: '/cert-tensorflow.jpg',
+    image: '/project-5.jpg', // Placeholder - replace with actual certificate image
     credentialId: 'TF-DEV-2023-005',
     issueDate: '2023',
     expiryDate: '2026',
@@ -81,7 +81,7 @@ const certificates = [
     title: 'HashiCorp Certified: Terraform Associate',
     issuer: 'HashiCorp',
     description: 'Certification validating skills in Infrastructure as Code using Terraform for cloud resource management.',
-    image: '/cert-terraform.jpg',
+    image: '/project-6.jpg', // Placeholder - replace with actual certificate image
     credentialId: 'HC-TA-2023-006',
     issueDate: '2023',
     expiryDate: '2025',
