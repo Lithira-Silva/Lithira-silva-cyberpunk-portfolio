@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronDown, Mail } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 
 interface Particle {
   x: number
@@ -171,48 +171,6 @@ function TypingAnimation() {
   )
 }
 
-function FloatingContactIcon() {
-  return (
-    <motion.div
-      className="fixed bottom-8 right-8 z-50 sm:bottom-8 sm:right-8"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ delay: 2, duration: 0.5 }}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <button
-        onClick={() => {
-          const contactSection = document.getElementById('contact')
-          contactSection?.scrollIntoView({ behavior: 'smooth' })
-        }}
-        className="w-14 h-14 rounded-full flex items-center justify-center text-black shadow-lg transition-all duration-300 relative overflow-hidden group"
-        style={{
-          background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.9) 0%, rgba(0, 229, 255, 0.8) 100%)',
-          backdropFilter: 'blur(10px) saturate(150%)',
-          WebkitBackdropFilter: 'blur(10px) saturate(150%)',
-          boxShadow: '0 8px 32px rgba(0, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.1)'
-        }}
-        aria-label="Contact me"
-      >
-        <Mail size={24} className="relative z-10" />
-        {/* Glass reflection */}
-        <div 
-          className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent rounded-full"
-          style={{
-            backdropFilter: 'blur(2px)',
-            WebkitBackdropFilter: 'blur(2px)'
-          }}
-        />
-        {/* Shine effect */}
-        <div className="absolute top-2 left-2 w-4 h-4 bg-white/40 rounded-full blur-sm" />
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </button>
-    </motion.div>
-  )
-}
-
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -311,9 +269,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Floating Contact Icon */}
-      <FloatingContactIcon />
 
       {/* Grid Overlay */}
       <div 

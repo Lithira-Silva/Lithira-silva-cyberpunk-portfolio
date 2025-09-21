@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Send, Github, Linkedin, Mail, CheckCircle, AlertCircle } from 'lucide-react'
+import { Send, Github, Linkedin, CheckCircle, AlertCircle } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 import Notification from './Notification'
 
@@ -77,12 +77,6 @@ const socialLinks = [
     icon: Linkedin,
     url: 'https://www.linkedin.com/in/lithira-silva-20b42a370',
     color: '#0077B5'
-  },
-  {
-    name: 'Email',
-    icon: Mail,
-    url: 'mailto:lithira@example.com',
-    color: '#00FFFF'
   }
 ]
 
@@ -433,20 +427,20 @@ export default function Contact() {
               </h4>
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
-                  <div className="text-2xl font-bold text-cyan-400 font-mono">10+</div>
-                  <div className="text-xs text-gray-400 font-mono">Years Experience</div>
+                  <div className="text-2xl font-bold text-cyan-400 font-mono">3</div>
+                  <div className="text-xs text-gray-400 font-mono">Live Projects</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-cyan-400 font-mono">50+</div>
-                  <div className="text-xs text-gray-400 font-mono">Projects Completed</div>
+                  <div className="text-2xl font-bold text-cyan-400 font-mono">3</div>
+                  <div className="text-xs text-gray-400 font-mono">Certifications</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-cyan-400 font-mono">99%</div>
-                  <div className="text-xs text-gray-400 font-mono">Client Satisfaction</div>
+                  <div className="text-2xl font-bold text-cyan-400 font-mono">100%</div>
+                  <div className="text-xs text-gray-400 font-mono">Project Success</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-cyan-400 font-mono">24h</div>
-                  <div className="text-xs text-gray-400 font-mono">Response Time</div>
+                  <div className="text-2xl font-bold text-cyan-400 font-mono">24/7</div>
+                  <div className="text-xs text-gray-400 font-mono">Learning Mode</div>
                 </div>
               </div>
             </div>

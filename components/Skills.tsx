@@ -82,53 +82,73 @@ function SkillCard({ skill, index, isVisible }: { skill: Skill; index: number; i
       onHoverEnd={() => setIsHovered(false)}
     >
       <div
-        className="h-full p-4 rounded-xl transition-all duration-500 hover:scale-105 border cursor-pointer"
+        className="h-full p-5 rounded-lg transition-all duration-300 hover:scale-[1.02] border relative overflow-hidden group"
         style={{
           background: isHovered 
-            ? `linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, ${categoryColors[skill.category]}15 30%, rgba(10, 10, 10, 0.95) 100%)`
-            : 'linear-gradient(135deg, rgba(20, 20, 20, 0.85) 0%, rgba(0, 255, 255, 0.05) 30%, rgba(10, 10, 10, 0.9) 100%)',
-          backdropFilter: 'blur(18px) saturate(160%)',
-          WebkitBackdropFilter: 'blur(18px) saturate(160%)',
-          borderColor: isHovered ? categoryColors[skill.category] : 'rgba(115, 115, 115, 0.25)',
+            ? `linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, ${categoryColors[skill.category]}12 40%, rgba(5, 5, 5, 0.98) 100%)`
+            : 'linear-gradient(135deg, rgba(15, 15, 15, 0.90) 0%, rgba(0, 255, 255, 0.03) 35%, rgba(8, 8, 8, 0.92) 100%)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          borderColor: isHovered ? `${categoryColors[skill.category]}60` : 'rgba(100, 100, 100, 0.20)',
           boxShadow: isHovered 
-            ? `0 25px 50px ${categoryColors[skill.category]}25, inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 40px ${categoryColors[skill.category]}15`
-            : '0 15px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+            ? `0 8px 32px ${categoryColors[skill.category]}20, 0 0 0 1px ${categoryColors[skill.category]}30, inset 0 1px 0 rgba(255, 255, 255, 0.1)`
+            : '0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
         }}
       >
         {/* Skill Header */}
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-3 mb-4">
+          <div 
+            className="p-2 rounded-lg flex-shrink-0"
+            style={{
+              background: `${categoryColors[skill.category]}15`,
+              border: `1px solid ${categoryColors[skill.category]}30`
+            }}
+          >
             <IconComponent 
               size={20} 
-              className="flex-shrink-0"
               color={categoryColors[skill.category]}
             />
-            <div>
-              <h3 className="font-orbitron font-bold text-white text-sm">{skill.name}</h3>
-              <span 
-                className="text-xs font-mono font-medium"
-                style={{ color: categoryColors[skill.category] }}
-              >
-                {categoryLabels[skill.category]}
-              </span>
-            </div>
           </div>
-          <div className="text-right">
-            <div 
-              className="text-lg font-orbitron font-black"
-              style={{ color: categoryColors[skill.category] }}
+          <div className="min-w-0 flex-1">
+            <h3 className="font-orbitron font-bold text-white text-sm leading-tight truncate mb-1">
+              {skill.name}
+            </h3>
+            <span 
+              className="text-xs font-mono font-medium uppercase tracking-wide"
+              style={{ color: `${categoryColors[skill.category]}CC` }}
             >
-              {skill.level}%
-            </div>
+              {categoryLabels[skill.category]}
+            </span>
           </div>
         </div>
 
-        {/* Progress Bar */}
+        {/* Progress Indicator */}
         <div className="mb-2">
-          <div className="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-mono text-gray-400">Proficiency</span>
+            <div className="flex space-x-1">
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{
+                    backgroundColor: i < Math.floor(skill.level / 20) 
+                      ? categoryColors[skill.category] 
+                      : 'rgba(100, 100, 100, 0.3)'
+                  }}
+                  initial={{ scale: 0 }}
+                  animate={isVisible ? { scale: 1 } : {}}
+                  transition={{ duration: 0.3, delay: index * 0.05 + 0.5 + i * 0.1 }}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="w-full bg-gray-800/40 rounded-full h-0.5 overflow-hidden">
             <motion.div
               className="h-full rounded-full"
-              style={{ backgroundColor: categoryColors[skill.category] }}
+              style={{ 
+                background: `linear-gradient(90deg, ${categoryColors[skill.category]} 0%, ${categoryColors[skill.category]}80 100%)`
+              }}
               initial={{ width: 0 }}
               animate={isVisible ? { width: `${skill.level}%` } : {}}
               transition={{ duration: 1.5, delay: index * 0.05 + 0.5 }}
@@ -136,15 +156,15 @@ function SkillCard({ skill, index, isVisible }: { skill: Skill; index: number; i
           </div>
         </div>
 
-        {/* Hover Glow Effect */}
+        {/* Subtle glow effect on hover */}
         <motion.div
-          className="absolute inset-0 rounded-xl pointer-events-none"
+          className="absolute inset-0 rounded-lg pointer-events-none"
           style={{
-            background: `radial-gradient(circle at center, ${categoryColors[skill.category]}10 0%, transparent 70%)`,
+            background: `radial-gradient(circle at center, ${categoryColors[skill.category]}08 0%, transparent 60%)`,
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
         />
       </div>
     </motion.div>
@@ -196,8 +216,8 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        {/* Skills Grid - Compact Layout */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-w-6xl mx-auto">
+        {/* Skills Grid - Polished Layout */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 max-w-7xl mx-auto">
           {skills.map((skill, index) => (
             <SkillCard
               key={skill.name}
@@ -208,9 +228,9 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Category Legend - Compact */}
+        {/* Category Legend - Enhanced */}
         <motion.div
-          className="mt-12 flex flex-wrap justify-center gap-6"
+          className="mt-16 flex flex-wrap justify-center gap-8"
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -218,12 +238,30 @@ export default function Skills() {
           {Object.entries(categoryLabels).map(([key, label]) => {
             const IconComponent = categoryIcons[key as keyof typeof categoryIcons]
             return (
-              <div key={key} className="flex items-center space-x-2">
-                <IconComponent 
-                  size={16} 
-                  color={categoryColors[key as keyof typeof categoryColors]}
-                />
-                <span className="text-gray-300 font-mono text-sm">{label}</span>
+              <div 
+                key={key} 
+                className="flex items-center space-x-3 px-4 py-2 rounded-lg border"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(0, 255, 255, 0.02) 50%, rgba(5, 5, 5, 0.9) 100%)',
+                  backdropFilter: 'blur(10px) saturate(120%)',
+                  WebkitBackdropFilter: 'blur(10px) saturate(120%)',
+                  borderColor: 'rgba(80, 80, 80, 0.3)',
+                  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
+                }}
+              >
+                <div 
+                  className="p-1.5 rounded"
+                  style={{
+                    background: `${categoryColors[key as keyof typeof categoryColors]}15`,
+                    border: `1px solid ${categoryColors[key as keyof typeof categoryColors]}25`
+                  }}
+                >
+                  <IconComponent 
+                    size={14} 
+                    color={categoryColors[key as keyof typeof categoryColors]}
+                  />
+                </div>
+                <span className="text-gray-300 font-mono text-sm font-medium">{label}</span>
               </div>
             )
           })}

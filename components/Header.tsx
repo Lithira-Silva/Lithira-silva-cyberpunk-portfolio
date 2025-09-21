@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Github, Linkedin, Mail, Download, FileText } from 'lucide-react'
+import { Menu, X, Github, Linkedin, Download, FileText } from 'lucide-react'
 
 const navigation = [
   { name: 'Home', href: '#home', id: 'home' },
@@ -16,7 +16,6 @@ const navigation = [
 const socialLinks = [
   { name: 'GitHub', href: 'https://github.com/Lithira-Silva', icon: Github },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/in/lithira-silva-20b42a370', icon: Linkedin },
-  { name: 'Email', href: 'mailto:lithira@example.com', icon: Mail },
 ]
 
 export default function Header() {
