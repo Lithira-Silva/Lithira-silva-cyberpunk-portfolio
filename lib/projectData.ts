@@ -50,6 +50,56 @@ export const allProjects: ProjectData[] = [
       'Advanced inventory & procurement control',
       'Secure payment gateway integration'
     ]
+  },
+  {
+    id: 2,
+    title: 'FitGeek - Premium Fitness and Wellness Website',
+    description: 'Modern, responsive fitness and wellness platform crafted for premium gym centers, featuring comprehensive service showcases, membership packages, trainer profiles, and integrated contact systems.',
+    longDescription: 'FitGeek is a comprehensive digital platform that serves as a one-stop hub for health enthusiasts, providing detailed information on fitness services, membership packages, trainer profiles, and wellness programs. Built with modern web technologies, this responsive website delivers a seamless user experience across all devices with clean UI/UX design, smooth animations, and interactive elements.',
+    image: '/projects/fitgeek.jpg',
+    technologies: ['React 18', 'TypeScript', 'Tailwind CSS', 'Vite', 'EmailJS', 'React Router', 'ESLint', 'PostCSS'],
+    category: 'Frontend',
+    year: '2025',
+    featured: true,
+    status: 'Live',
+    metrics: {},
+    links: {
+      liveHost: 'https://fitgeek-website.vercel.app/',
+      github: 'https://github.com/Lithira-Silva/fitgeek-website'
+    },
+    highlights: [
+      'Responsive design for all device types',
+      'Modern UI/UX with smooth animations',
+      'Functional contact system with EmailJS',
+      'Comprehensive membership package comparison',
+      'SEO optimized semantic HTML structure',
+      'Type-safe development with TypeScript'
+    ]
+  },
+  {
+    id: 3,
+    title: 'SpendWise - Personal Finance Management App',
+    description: 'Cutting-edge Android personal finance management app designed with modern development practices, featuring intuitive budget tracking, expense management, and visual analytics through Material Design 3 interface.',
+    longDescription: 'SpendWise empowers users in tracking income and expenses, managing budgets, and gaining insights into spending patterns through intuitive visual charts and statistics. Built with Jetpack Compose and MVVM architecture, this app offers a clean, Material Design 3 interface and robust features tailored for Android users seeking complete financial control.',
+    image: '/projects/spendwise.jpg',
+    technologies: ['Kotlin', 'Jetpack Compose', 'Material Design 3', 'MVVM', 'Android SDK', 'Gradle', 'SharedPreferences', 'MPAndroidChart'],
+    category: 'Mobile',
+    year: '2025',
+    featured: true,
+    status: 'Completed',
+    metrics: {},
+    links: {
+      liveHost: '',
+      github: 'https://github.com/Lithira-Silva/SpendWise---Personal-Finance-Management-App'
+    },
+    highlights: [
+      'Modern Jetpack Compose declarative UI',
+      'Material Design 3 polished interface',
+      'MVVM architecture for scalability',
+      'Visual charts and spending analytics',
+      'Local data persistence with DataStore',
+      'Target SDK 35 with Android best practices'
+    ]
   }
   // Add more projects here as needed
 ]

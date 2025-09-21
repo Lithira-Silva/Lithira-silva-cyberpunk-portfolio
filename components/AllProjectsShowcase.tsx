@@ -47,17 +47,32 @@ function ProjectCard({ project, index }: ProjectCardProps) {
         {/* Category & Year */}
         <div className="flex items-center justify-between mb-3 text-xs font-mono">
           <div className="flex items-center space-x-2">
-            <span 
-              className="px-2 py-1 text-green-300 rounded-full border border-green-400/40 font-semibold"
-              style={{
-                background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(34, 197, 94, 0.08) 100%)',
-                backdropFilter: 'blur(6px) saturate(140%)',
-                WebkitBackdropFilter: 'blur(6px) saturate(140%)',
-                boxShadow: '0 2px 6px rgba(34, 197, 94, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-              }}
-            >
-              Live
-            </span>
+            {project.status === 'Live' && (
+              <span 
+                className="px-2 py-1 text-green-300 rounded-full border border-green-400/40 font-semibold"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(34, 197, 94, 0.08) 100%)',
+                  backdropFilter: 'blur(6px) saturate(140%)',
+                  WebkitBackdropFilter: 'blur(6px) saturate(140%)',
+                  boxShadow: '0 2px 6px rgba(34, 197, 94, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                }}
+              >
+                Live
+              </span>
+            )}
+            {project.status === 'Completed' && (
+              <span 
+                className="px-2 py-1 text-blue-300 rounded-full border border-blue-400/40 font-semibold"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(59, 130, 246, 0.08) 100%)',
+                  backdropFilter: 'blur(6px) saturate(140%)',
+                  WebkitBackdropFilter: 'blur(6px) saturate(140%)',
+                  boxShadow: '0 2px 6px rgba(59, 130, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                }}
+              >
+                Completed
+              </span>
+            )}
             <span className="px-2 py-1 bg-cyan-400/10 text-cyan-400 rounded">
               {project.category}
             </span>
@@ -103,28 +118,30 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 
         {/* Action Buttons */}
         <div className="flex space-x-2 pt-2">
-          <a
-            href={project.links.liveHost}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center px-3 py-2 rounded-lg font-mono text-xs font-medium text-white transition-all duration-300 hover:scale-105"
-            aria-label={`View ${project.title} live hosted application`}
-            style={{
-              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 255, 255, 0.08) 100%)',
-              backdropFilter: 'blur(10px) saturate(140%)',
-              WebkitBackdropFilter: 'blur(10px) saturate(140%)',
-              border: '1px solid rgba(0, 255, 255, 0.3)',
-              boxShadow: '0 3px 10px rgba(0, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-            }}
-          >
-            <ExternalLink size={14} className="mr-1" />
-            Live
-          </a>
+          {project.links.liveHost && (
+            <a
+              href={project.links.liveHost}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center px-3 py-2 rounded-lg font-mono text-xs font-medium text-white transition-all duration-300 hover:scale-105"
+              aria-label={`View ${project.title} live hosted application`}
+              style={{
+                background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 255, 255, 0.08) 100%)',
+                backdropFilter: 'blur(10px) saturate(140%)',
+                WebkitBackdropFilter: 'blur(10px) saturate(140%)',
+                border: '1px solid rgba(0, 255, 255, 0.3)',
+                boxShadow: '0 3px 10px rgba(0, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+              }}
+            >
+              <ExternalLink size={14} className="mr-1" />
+              Live
+            </a>
+          )}
           <a
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center px-3 py-2 rounded-lg font-mono text-xs font-medium text-white transition-all duration-300 hover:scale-105"
+            className={`${project.links.liveHost ? 'flex-1' : 'w-full'} flex items-center justify-center px-3 py-2 rounded-lg font-mono text-xs font-medium text-white transition-all duration-300 hover:scale-105`}
             aria-label={`View ${project.title} source code repository`}
             style={{
               background: 'linear-gradient(135deg, rgba(115, 115, 115, 0.12) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(115, 115, 115, 0.08) 100%)',
