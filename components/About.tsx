@@ -12,34 +12,22 @@ const skills = [
 
 const achievements = [
   {
-    year: '2025',
-    title: 'Information Technology Degree',
-    company: 'SLIIT (Sri Lanka Institute of Information Technology)',
-    description: 'Pursuing Bachelor of Science in Information Technology with focus on Full-Stack Development and Cloud Computing'
+    year: '2023-Present',
+    title: 'BSc (Hons) in Information Technology',
+    company: 'SLIIT, Malabe',
+    description: 'Specializing in Information Technology. Currently in Year 3, Semester 1. Focus on Software Engineering, Full-Stack Development, and Cloud Computing'
   },
   {
-    year: '2024',
-    title: 'Advanced Cloud Computing Certification',
-    company: 'Professional Development',
-    description: 'Completed AWS Solutions Architect Professional and Google Cloud ML Engineer certifications'
+    year: '2022-2023',
+    title: 'G.C.E. Advanced Level - Commerce Stream',
+    company: 'D. S. Senanayake College, Colombo',
+    description: 'Completed Advanced Level in Commerce Stream (English Medium). Passed subjects: Accounting, Economics, and ICT with strong performance'
   },
   {
-    year: '2023',
-    title: 'Full-Stack Development Specialization',
-    company: 'Technical Training',
-    description: 'Mastered MERN stack, TypeScript, and modern web development frameworks through intensive projects'
-  },
-  {
-    year: '2022',
-    title: 'Programming Foundations',
-    company: 'Academic Study',
-    description: 'Built strong foundation in Java, Python, C++, and software engineering principles'
-  },
-  {
-    year: '2021',
-    title: 'IT Foundation Studies',
-    company: 'SLIIT',
-    description: 'Started Information Technology degree program, establishing core computing and mathematics skills'
+    year: '2019',
+    title: 'G.C.E. Ordinary Level',
+    company: 'I-GATE College, Thalawathugoda',
+    description: 'Successfully completed General Certificate of Education Ordinary Level. Built strong foundation in core subjects and analytical thinking'
   }
 ]
 
@@ -57,7 +45,7 @@ function AnimatedTimeline() {
           }
         })
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     )
 
     const timelineItems = timelineRef.current?.querySelectorAll('[data-index]')
@@ -67,36 +55,99 @@ function AnimatedTimeline() {
   }, [])
 
   return (
-    <div ref={timelineRef} className="overflow-x-auto pb-4">
-      <div className="flex space-x-6 min-w-max">
+    <div ref={timelineRef} className="w-full">
+      {/* Desktop Layout - Horizontal Timeline */}
+      <div className="hidden lg:block overflow-x-auto pb-6">
+        <div className="flex space-x-8 min-w-max px-4 pt-8">
+          {achievements.map((achievement, index) => (
+            <motion.div
+              key={index}
+              data-index={index}
+              className="flex-shrink-0 w-96 rounded-xl p-8 relative transition-all duration-500 hover:scale-105 hover:shadow-2xl group"
+              style={{
+                background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.9) 0%, rgba(0, 255, 255, 0.08) 30%, rgba(15, 15, 15, 0.9) 100%)',
+                backdropFilter: 'blur(20px) saturate(150%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(150%)',
+                border: '1px solid rgba(0, 255, 255, 0.2)',
+                boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 255, 255, 0.1)'
+              }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={visibleItems.includes(index) ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: index * 0.15 }}
+            >
+              {/* Year Badge - Fixed positioning */}
+              <div className="absolute -top-6 left-8 bg-gradient-to-r from-cyan-400 to-cyan-500 text-black px-6 py-3 rounded-full text-base font-mono font-bold shadow-lg z-10 whitespace-nowrap">
+                {achievement.year}
+              </div>
+              
+              {/* Content */}
+              <div className="mt-8 space-y-4">
+                <h4 className="font-orbitron font-bold text-xl text-white leading-tight group-hover:text-cyan-400 transition-colors duration-300">
+                  {achievement.title}
+                </h4>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                  <p className="text-cyan-400 font-mono text-base font-medium">
+                    {achievement.company}
+                  </p>
+                </div>
+                <p className="text-gray-300 font-mono text-sm leading-relaxed">
+                  {achievement.description}
+                </p>
+              </div>
+              
+              {/* Hover Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/5 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile/Tablet Layout - Vertical Timeline */}
+      <div className="lg:hidden space-y-6">
         {achievements.map((achievement, index) => (
           <motion.div
             key={index}
             data-index={index}
-            className="flex-shrink-0 w-80 rounded-lg p-6 relative transition-all duration-300 hover:scale-105"
-            style={{
-              background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.8) 0%, rgba(0, 255, 255, 0.06) 30%, rgba(15, 15, 15, 0.85) 100%)',
-              backdropFilter: 'blur(15px) saturate(140%)',
-              WebkitBackdropFilter: 'blur(15px) saturate(140%)',
-              border: '1px solid rgba(115, 115, 115, 0.3)',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
-            }}
-            initial={{ opacity: 0, y: 50 }}
-            animate={visibleItems.includes(index) ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
+            className="relative pl-8 pb-8 border-l-2 border-cyan-400/30 last:border-l-0"
+            initial={{ opacity: 0, x: -30 }}
+            animate={visibleItems.includes(index) ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
           >
-            <div className="absolute -top-3 left-6 bg-cyan-400 text-black px-3 py-1 rounded-full text-sm font-mono font-bold">
-              {achievement.year}
+            {/* Timeline Dot */}
+            <div className="absolute -left-2 top-2 w-4 h-4 bg-cyan-400 rounded-full shadow-lg"></div>
+            
+            {/* Content Card */}
+            <div 
+              className="ml-6 p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]"
+              style={{
+                background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.9) 0%, rgba(0, 255, 255, 0.06) 30%, rgba(15, 15, 15, 0.9) 100%)',
+                backdropFilter: 'blur(15px) saturate(140%)',
+                WebkitBackdropFilter: 'blur(15px) saturate(140%)',
+                border: '1px solid rgba(0, 255, 255, 0.2)',
+                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+              }}
+            >
+              {/* Year Badge */}
+              <span className="inline-block bg-gradient-to-r from-cyan-400 to-cyan-500 text-black px-4 py-2 rounded-full text-sm font-mono font-bold mb-4 shadow-lg whitespace-nowrap">
+                {achievement.year}
+              </span>
+              
+              <h4 className="font-orbitron font-bold text-lg text-white mb-3 leading-tight">
+                {achievement.title}
+              </h4>
+              
+              <div className="flex items-center space-x-2 mb-3">
+                <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>
+                <p className="text-cyan-400 font-mono text-sm font-medium">
+                  {achievement.company}
+                </p>
+              </div>
+              
+              <p className="text-gray-300 font-mono text-sm leading-relaxed">
+                {achievement.description}
+              </p>
             </div>
-            <h4 className="font-orbitron font-bold text-lg text-white mt-4 mb-2">
-              {achievement.title}
-            </h4>
-            <p className="text-cyan-400 font-mono text-sm mb-3">
-              {achievement.company}
-            </p>
-            <p className="text-gray-300 font-mono text-sm leading-relaxed">
-              {achievement.description}
-            </p>
           </motion.div>
         ))}
       </div>
@@ -227,12 +278,12 @@ export default function About() {
 
         {/* Achievement Timeline */}
         <motion.div
-          className="mt-20"
+          className="mt-20 pt-8"
           initial={{ opacity: 0, y: 50 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h3 className="font-orbitron font-bold text-2xl md:text-3xl text-white mb-8 text-center">
+          <h3 className="font-orbitron font-bold text-2xl md:text-3xl text-white mb-12 text-center">
             Education
           </h3>
           <AnimatedTimeline />
