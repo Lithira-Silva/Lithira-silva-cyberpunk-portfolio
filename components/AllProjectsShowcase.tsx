@@ -73,6 +73,19 @@ function ProjectCard({ project, index }: ProjectCardProps) {
                 Completed
               </span>
             )}
+            {project.status === 'In Development' && (
+              <span 
+                className="px-2 py-1 text-orange-300 rounded-full border border-orange-400/40 font-semibold animate-pulse"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(251, 146, 60, 0.12) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(251, 146, 60, 0.08) 100%)',
+                  backdropFilter: 'blur(6px) saturate(140%)',
+                  WebkitBackdropFilter: 'blur(6px) saturate(140%)',
+                  boxShadow: '0 2px 6px rgba(251, 146, 60, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                }}
+              >
+                In Progress
+              </span>
+            )}
             <span className="px-2 py-1 bg-cyan-400/10 text-cyan-400 rounded">
               {project.category}
             </span>

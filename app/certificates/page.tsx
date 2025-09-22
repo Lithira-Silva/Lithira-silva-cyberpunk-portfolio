@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import AllCertificatesShowcase from '@/components/AllCertificatesShowcase'
 
 export const metadata: Metadata = {
-  title: 'Certifications | Lithira Silva - Full-Stack AI Engineer',
+  title: 'Certifications | Lithira Silva',
   description: 'Explore my comprehensive portfolio of professional certifications in cloud computing, artificial intelligence, DevOps, and modern development practices.',
   keywords: [
     'certifications',

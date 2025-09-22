@@ -100,6 +100,31 @@ export const allProjects: ProjectData[] = [
       'Local data persistence with DataStore',
       'Target SDK 35 with Android best practices'
     ]
+  },
+  {
+    id: 4,
+    title: 'NexTo - AI-Powered Task Management Application',
+    description: 'Sophisticated AI-powered task management platform that exemplifies modern full-stack development with natural language parsing, priority detection, and personalized productivity insights.',
+    longDescription: 'NexTo is a production-ready productivity platform that integrates advanced frontend design, intelligent backend architecture, and cutting-edge AI features. The application offers seamless task management through natural language parsing, smart categorization, priority detection, and personalized insights, creating an intuitive user experience powered by modern web technologies.',
+    image: '/projects/nexto.jpg',
+    technologies: ['Next.js 14', 'React 18', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Supabase', 'PostgreSQL', 'AI/NLP'],
+    category: 'Full-Stack',
+    year: '2025',
+    featured: false,
+    status: 'In Development',
+    metrics: {},
+    links: {
+      liveHost: '',
+      github: 'https://github.com/Lithira-Silva/NexTo'
+    },
+    highlights: [
+      'AI-powered natural language task parsing',
+      'Smart priority detection and categorization',
+      'Real-time collaboration with Supabase',
+      'Advanced productivity insights and analytics',
+      'Context-aware suggestions and recommendations',
+      'Modern Next.js 14 with App Router architecture'
+    ]
   }
   // Add more projects here as needed
 ]

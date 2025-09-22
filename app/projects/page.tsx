@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import AllProjectsShowcase from '@/components/AllProjectsShowcase'
 
 export const metadata: Metadata = {
-  title: 'Projects | Lithira Silva - Full-Stack AI Engineer',
+  title: 'Projects | Lithira Silva',
   description: 'Explore my comprehensive portfolio of AI-powered applications, machine learning systems, and innovative full-stack solutions.',
   keywords: [
     'projects',
