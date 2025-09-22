@@ -119,29 +119,11 @@ export default function Header() {
           >
             <button
               onClick={() => scrollToSection('#home', 'home')}
-              className="group flex items-center space-x-2"
+              className="group flex items-center"
             >
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-lg flex items-center justify-center relative overflow-hidden">
-                  <span className="font-orbitron font-black text-black text-lg relative z-10">LS</span>
-                  {/* Glass overlay */}
-                  <div 
-                    className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent"
-                    style={{
-                      backdropFilter: 'blur(1px)',
-                      WebkitBackdropFilter: 'blur(1px)'
-                    }}
-                  />
-                  {/* Highlight */}
-                  <div className="absolute top-1 left-1 w-3 h-3 bg-white/30 rounded-full blur-sm" />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-lg blur-md opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-              </div>
-              <div className="hidden sm:block">
-                <span className="font-orbitron font-bold text-white text-lg">
-                  Lithira<span className="text-cyan-400">Silva</span>
-                </span>
-              </div>
+              <span className="font-orbitron font-bold text-white text-lg">
+                Lithira<span className="text-cyan-400">Silva</span>
+              </span>
             </button>
           </motion.div>
 
