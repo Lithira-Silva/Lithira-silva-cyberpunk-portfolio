@@ -61,31 +61,19 @@ export default function FloatingResumeButton() {
 
         {/* Expandable Text */}
         <motion.div
-          className="overflow-hidden whitespace-nowrap"
-          initial={{ width: 0 }}
-          animate={{ width: isHovered ? 'auto' : 0 }}
-          transition={{ duration: 0.3 }}
-          style={{
-            background: isHovered ? 'linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.7) 100%)' : 'transparent',
-            backdropFilter: isHovered ? 'blur(15px)' : 'none',
-            WebkitBackdropFilter: isHovered ? 'blur(15px)' : 'none'
+          className="overflow-hidden"
+          initial={{ width: 0, opacity: 0 }}
+          animate={{ 
+            width: isHovered ? 'auto' : 0,
+            opacity: isHovered ? 1 : 0
           }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <div className="px-4 py-2 flex items-center">
-            <span className="font-mono text-sm text-white mr-2 relative z-10">
+          <div className="flex items-center justify-center px-4 py-2 whitespace-nowrap">
+            <span className="font-mono text-sm text-white font-medium">
               Download Resume
             </span>
-            <Download size={16} className="text-cyan-400 relative z-10" />
-            {/* Glass overlay for text area */}
-            {isHovered && (
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-white/5 to-cyan-400/10"
-                style={{
-                  backdropFilter: 'blur(5px)',
-                  WebkitBackdropFilter: 'blur(5px)'
-                }}
-              />
-            )}
+            <Download size={16} className="text-cyan-400 ml-2 flex-shrink-0" />
           </div>
         </motion.div>
 
@@ -109,26 +97,6 @@ export default function FloatingResumeButton() {
           }}
         />
       </motion.button>
-
-      {/* Tooltip */}
-      <motion.div
-        className="absolute left-full ml-4 top-1/2 transform -translate-y-1/2"
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ 
-          opacity: isHovered ? 1 : 0,
-          x: isHovered ? 0 : -10 
-        }}
-        transition={{ duration: 0.2 }}
-      >
-        <div className="bg-black/90 backdrop-blur-md border border-cyan-400/30 rounded-lg px-3 py-2">
-          <p className="font-mono text-xs text-white whitespace-nowrap">
-            Get my latest resume
-          </p>
-          <div className="absolute left-0 top-1/2 transform -translate-x-1 -translate-y-1/2">
-            <div className="w-2 h-2 bg-black/90 border-l border-b border-cyan-400/30 rotate-45"></div>
-          </div>
-        </div>
-      </motion.div>
     </motion.div>
   )
 }
