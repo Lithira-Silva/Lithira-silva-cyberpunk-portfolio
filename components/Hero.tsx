@@ -39,7 +39,7 @@ function createParticle(canvasWidth: number, canvasHeight: number): Particle {
 function AnimatedParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -162,7 +162,7 @@ function TypingAnimation() {
     <span className="relative">
       {currentText}
       <span 
-        className={`inline-block w-0.5 h-6 md:h-8 lg:h-10 xl:h-12 bg-cyan-400 ml-1 transition-opacity duration-100 ${
+        className={`inline-block w-0.5 h-4 sm:h-5 md:h-6 lg:h-8 xl:h-10 2xl:h-12 bg-cyan-400 ml-1 transition-opacity duration-100 ${
           showCursor ? 'opacity-100' : 'opacity-0'
         }`}
         style={{ animation: 'glow 1.5s ease-in-out infinite alternate' }}
@@ -184,26 +184,26 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black pt-20 lg:pt-16">
+    <section id="home" className="relative flex items-center justify-center min-h-screen pt-24 overflow-hidden bg-black md:pt-20 lg:pt-16">
       {/* Animated Background */}
       <AnimatedParticles />
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto py-12 lg:py-16">
+      <div className="relative z-10 max-w-5xl px-4 py-8 mx-auto text-center sm:px-6 sm:py-12 lg:py-16">
         <motion.h1
-          className="font-orbitron font-black text-4xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-8 lg:mb-6"
+          className="mb-6 text-3xl font-black leading-tight font-orbitron sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl sm:mb-8 lg:mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          <span className="block text-white">Lithira Silva:</span>
-          <span className="block bg-gradient-to-r from-white via-cyan-400 to-white bg-clip-text text-transparent">
+          <span className="block mb-2 text-white">Lithira Silva:</span>
+          <span className="block text-transparent bg-gradient-to-r from-white via-cyan-400 to-white bg-clip-text">
             Architect of Tomorrow's Code
           </span>
         </motion.h1>
 
         <motion.h2
-          className="font-mono text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 mb-16 lg:mb-12 leading-relaxed max-w-4xl mx-auto min-h-[3rem] md:min-h-[4rem] lg:min-h-[5rem] xl:min-h-[6rem]"
+          className="font-mono text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-gray-300 mb-12 sm:mb-16 lg:mb-12 leading-relaxed max-w-4xl mx-auto min-h-[2.5rem] sm:min-h-[3rem] md:min-h-[4rem] lg:min-h-[5rem] xl:min-h-[6rem] px-2"
           initial={{ opacity: 0, y: 30 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
@@ -218,7 +218,7 @@ export default function Hero() {
         >
           <button
             onClick={scrollToProjects}
-            className="group relative inline-flex items-center justify-center px-8 py-4 font-mono font-medium text-white border-2 border-cyan-400/50 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black overflow-hidden"
+            className="relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-mono text-sm font-medium text-white transition-all duration-300 border-2 rounded-lg group sm:px-8 sm:py-4 sm:text-base border-cyan-400/50 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black"
             style={{
               background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 255, 255, 0.1) 100%)',
               backdropFilter: 'blur(15px) saturate(180%)',
@@ -226,17 +226,17 @@ export default function Hero() {
               boxShadow: '0 0 30px rgba(0, 255, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 255, 255, 0.1)'
             }}
           >
-            <span className="mr-2 relative z-10">View Projects</span>
+            <span className="relative z-10 mr-2">View Projects</span>
             <motion.div
               animate={{ y: [0, 4, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="relative z-10"
             >
-              <ChevronDown size={20} />
+              <ChevronDown size={18} />
             </motion.div>
             {/* Hover glass effect */}
             <div
-              className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/30 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-all duration-300"
+              className="absolute inset-0 transition-all duration-300 rounded-lg opacity-0 bg-gradient-to-r from-cyan-400/30 to-cyan-500/20 group-hover:opacity-100"
               style={{
                 backdropFilter: 'blur(8px)',
                 WebkitBackdropFilter: 'blur(8px)'
@@ -251,19 +251,19 @@ export default function Hero() {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="mt-16 lg:mt-12 flex justify-center"
+          className="flex justify-center mt-12 sm:mt-16 lg:mt-12"
           initial={{ opacity: 0 }}
           animate={isLoaded ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 1.5 }}
         >
           <motion.div
-            className="w-6 h-10 border-2 border-gray-400 rounded-full p-1"
+            className="w-5 h-8 p-1 border-2 border-gray-400 rounded-full sm:w-6 sm:h-10"
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
             <motion.div
-              className="w-1 h-2 bg-cyan-400 rounded-full mx-auto"
-              animate={{ y: [0, 16, 0] }}
+              className="w-0.5 h-1.5 sm:w-1 sm:h-2 bg-cyan-400 rounded-full mx-auto"
+              animate={{ y: [0, 12, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           </motion.div>
@@ -272,7 +272,7 @@ export default function Hero() {
 
       {/* Grid Overlay */}
       <div 
-        className="absolute inset-0 opacity-5 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-5"
         style={{
           backgroundImage: `
             linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),

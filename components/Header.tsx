@@ -434,19 +434,20 @@ export default function Header() {
                 boxShadow: 'inset 0 1px 0 rgba(0, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.4)'
               }}
             >
-              <div className="px-2 pt-2 pb-3 space-y-1 border-t border-cyan-400/20">
+              <div className="px-4 pt-4 pb-6 space-y-2">
                 {navigation.map((item, index) => (
                   <motion.button
                     key={item.name}
                     onClick={() => scrollToSection(item.href, item.id)}
-                    className={`block w-full text-left px-3 py-2 font-mono text-base transition-all duration-300 rounded-md ${
+                    className={`block w-full text-left px-4 py-3 font-mono text-base transition-all duration-300 rounded-lg touch-manipulation ${
                       activeSection === item.id
-                        ? 'text-cyan-400 bg-cyan-400/10'
-                        : 'text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/5'
+                        ? 'text-cyan-400 bg-cyan-400/10 border border-cyan-400/20'
+                        : 'text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/5 border border-transparent'
                     }`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
+                    style={{ minHeight: '48px' }}
                   >
                     {item.name}
                   </motion.button>
@@ -455,7 +456,11 @@ export default function Header() {
                 {/* Mobile Resume Button */}
                 <motion.button
                   onClick={handleDownloadResume}
-                  className="w-full flex items-center justify-center px-3 py-3 font-mono text-base text-white bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-md hover:from-cyan-500 hover:to-cyan-600 transition-all duration-300 mt-2"
+                  className="w-full flex items-center justify-center px-4 py-4 font-mono text-base text-black rounded-lg transition-all duration-300 mt-4 touch-manipulation"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.9) 0%, rgba(0, 230, 230, 1) 50%, rgba(0, 200, 255, 0.9) 100%)',
+                    minHeight: '52px'
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: navigation.length * 0.1 }}
@@ -467,21 +472,22 @@ export default function Header() {
                 </motion.button>
                 
                 {/* Mobile Social Links */}
-                <div className="flex items-center justify-center space-x-6 pt-4 border-t border-cyan-400/10">
+                <div className="flex items-center justify-center space-x-8 pt-6 border-t border-cyan-400/10">
                   {socialLinks.map((link, index) => (
                     <motion.a
                       key={link.name}
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 text-gray-400 hover:text-cyan-400 transition-colors duration-300"
+                      className="p-3 text-gray-400 hover:text-cyan-400 transition-colors duration-300 rounded-lg touch-manipulation"
+                      style={{ minHeight: '48px', minWidth: '48px' }}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <link.icon size={20} />
+                      <link.icon size={22} />
                       <span className="sr-only">{link.name}</span>
                     </motion.a>
                   ))}

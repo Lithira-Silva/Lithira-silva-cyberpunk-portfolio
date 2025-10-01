@@ -248,22 +248,22 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-20 md:py-32 section-padding bg-black"
+      className="py-16 md:py-20 lg:py-32 section-padding bg-black"
     >
       <div className="container-max">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="font-orbitron font-black text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+          <h2 className="font-orbitron font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4 md:mb-6">
             About <span className="text-cyan-400">Me</span>
           </h2>
-          <div className="w-24 h-1 bg-cyan-400 mx-auto"></div>
+          <div className="w-16 sm:w-20 md:w-24 h-1 bg-cyan-400 mx-auto"></div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
           {/* Profile Image */}
           <motion.div
             className="relative order-2 lg:order-1"
@@ -271,7 +271,7 @@ export default function About() {
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto">
               {/* Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-full blur-2xl opacity-20 animate-pulse"></div>
               
@@ -297,33 +297,33 @@ export default function About() {
 
           {/* Bio Content */}
           <motion.div
-            className="space-y-8 order-1 lg:order-2"
+            className="space-y-6 md:space-y-8 order-1 lg:order-2"
             initial={{ opacity: 0, x: 50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="space-y-6 text-gray-300 font-mono leading-relaxed">
-              <p className="text-lg">
+            <div className="space-y-4 md:space-y-6 text-gray-300 font-mono leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg">
                 As an <strong className="text-cyan-400">IT undergraduate at SLIIT</strong> specializing in Information Technology, 
                 I am a passionate Full-Stack Developer with a growing proficiency in <strong className="text-white">TypeScript</strong>, 
                 alongside a strong foundation in <strong className="text-white">Java</strong>, <strong className="text-white">Python</strong>, 
                 <strong className="text-white">C++</strong>, and the <strong className="text-cyan-400">MERN stack</strong>.
               </p>
               
-              <p>
+              <p className="text-sm sm:text-base">
                 Currently diving into <strong className="text-cyan-400">cloud computing</strong>, I aim to master the latest advancements 
                 and integrate <strong className="text-white">AI technologies</strong> to elevate my skills to global standards. 
                 My diverse interests span <strong className="text-white">software engineering</strong>, 
                 <strong className="text-white">web and mobile app development</strong>, and <strong className="text-white">cloud solutions</strong>.
               </p>
               
-              <p>
+              <p className="text-sm sm:text-base">
                 My passion is fueled by hands-on projects like <strong className="text-cyan-400">construction bidding platforms</strong> 
                 and <strong className="text-cyan-400">Android apps</strong>, where I continuously challenge myself to build innovative solutions 
                 that solve real-world problems with cutting-edge technology.
               </p>
               
-              <p>
+              <p className="text-sm sm:text-base">
                 Beyond coding, I stay updated with <strong className="text-white">cutting-edge trends</strong> and enjoy collaborating 
                 on innovative tech initiatives. I believe in the power of continuous learning and am always eager to explore 
                 new technologies that can make a meaningful impact.
@@ -332,7 +332,7 @@ export default function About() {
 
             {/* Skills */}
             <div>
-              <h3 className="font-orbitron font-bold text-xl text-white mb-4">
+              <h3 className="font-orbitron font-bold text-lg md:text-xl text-white mb-3 md:mb-4">
                 Core Technologies
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -354,12 +354,12 @@ export default function About() {
 
         {/* Achievement Timeline */}
         <motion.div
-          className="mt-20 pt-8"
+          className="mt-16 md:mt-20 pt-6 md:pt-8"
           initial={{ opacity: 0, y: 50 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h3 className="font-orbitron font-bold text-2xl md:text-3xl text-white mb-12 text-center">
+          <h3 className="font-orbitron font-bold text-xl sm:text-2xl md:text-3xl text-white mb-8 md:mb-12 text-center">
             Education
           </h3>
           <AnimatedTimeline />
