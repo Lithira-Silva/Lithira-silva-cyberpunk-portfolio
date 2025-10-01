@@ -75,6 +75,24 @@ export const allCertifications: CertificationData[] = [
     level: 'Associate',
     featured: true,
     status: 'Valid'
+  },
+  {
+    id: 4,
+    title: 'NIBM Certificate in Software Engineering',
+    issuer: 'National Institute of Business Management (NIBM), Sri Lanka',
+    description: 'Specialized certificate program in Software Engineering covering software development principles, programming methodologies, and information systems management.',
+    longDescription: 'This certificate from the National Institute of Business Management (NIBM), Sri Lanka, recognizes the successful completion of a specialized program in Software Engineering. Awarded to Lithira Lochana Silva on October 22, 2020 (Certificate No. CSE021), the program spanned from February 27, 2020, to September 17, 2020, providing foundational and practical knowledge in software development principles, programming methodologies, and information systems management. This qualification underscores a commitment to professional growth in the field of software engineering, equipping the recipient with essential skills for building robust applications and contributing to technology-driven solutions in a dynamic industry.',
+    image: '/certificates/images/nibm certificate.png',
+    credentialId: 'CSE021',
+    issueDate: '2020',
+    expiryDate: 'Never',
+    verifyUrl: 'https://nibm.lk', // NIBM official website
+    downloadUrl: '/certificates/pdfs/Nibm Certificate.pdf',
+    skills: ['Software Engineering', 'Programming Methodologies', 'Information Systems', 'Software Development', 'Application Design', 'Systems Analysis'],
+    category: 'Software Engineering',
+    level: 'Professional',
+    featured: false,
+    status: 'Valid'
   }
   // Add more certifications here as needed
 ]
