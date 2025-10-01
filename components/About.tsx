@@ -153,47 +153,47 @@ function AnimatedTimeline() {
       </div>
 
       {/* Mobile/Tablet - Vertical Timeline */}
-      <div className="lg:hidden space-y-8 relative">
-        {/* Vertical Timeline Line - Reduced brightness */}
-        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400/10 via-cyan-400/40 to-cyan-400/10 rounded-full">
-          <div className="absolute inset-0 bg-gradient-to-b from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 blur-sm rounded-full"></div>
+      <div className="lg:hidden space-y-6 md:space-y-8 relative px-2">
+        {/* Vertical Timeline Line - More visible */}
+        <div className="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400/30 via-cyan-400/60 to-cyan-400/30 rounded-full">
+          <div className="absolute inset-0 bg-gradient-to-b from-cyan-400/10 via-cyan-400/40 to-cyan-400/10 blur-sm rounded-full"></div>
         </div>
         
         {achievements.map((achievement, index) => (
           <motion.div
             key={index}
             data-index={index}
-            className="relative pl-16"
+            className="relative pl-12 sm:pl-16"
             initial={{ opacity: 0, x: -30 }}
             animate={visibleItems.includes(index) ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: index * 0.15 }}
           >
-            {/* Timeline Dot - Smaller and less bright */}
-            <div className="absolute left-4 top-8 w-4 h-4 bg-gradient-to-br from-cyan-400/80 to-cyan-500/80 rounded-full shadow-md border-2 border-black z-10">
-              <div className="absolute inset-0.5 bg-gradient-to-br from-cyan-300/60 to-cyan-600/60 rounded-full"></div>
+            {/* Timeline Dot - More visible */}
+            <div className="absolute left-2 top-6 w-6 h-6 bg-gradient-to-br from-cyan-400 to-cyan-500 rounded-full shadow-lg border-2 border-black z-10">
+              <div className="absolute inset-1 bg-gradient-to-br from-cyan-300 to-cyan-600 rounded-full"></div>
             </div>
             
             {/* Mobile Education Card */}
             <div 
-              className="p-6 rounded-xl transition-all duration-300 hover:scale-[1.02] relative"
+              className="p-4 sm:p-6 rounded-xl transition-all duration-300 hover:scale-[1.02] relative min-h-[160px]"
               style={{
-                background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.9) 0%, rgba(0, 255, 255, 0.06) 30%, rgba(15, 15, 15, 0.9) 100%)',
+                background: 'linear-gradient(135deg, rgba(25, 25, 25, 0.95) 0%, rgba(0, 255, 255, 0.12) 30%, rgba(15, 15, 15, 0.95) 100%)',
                 backdropFilter: 'blur(15px) saturate(140%)',
                 WebkitBackdropFilter: 'blur(15px) saturate(140%)',
-                border: '1px solid rgba(0, 255, 255, 0.2)',
-                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+                border: '1px solid rgba(0, 255, 255, 0.4)',
+                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
               }}
             >
               {/* Mobile Logo */}
-              <div className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-cyan-400/30 shadow-lg">
+              <div className="absolute top-3 right-3 w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-cyan-400/50 shadow-lg">
                 <Image
                   src={achievement.logo}
                   alt={`${achievement.company} logo`}
-                  width={28}
-                  height={28}
+                  width={32}
+                  height={32}
                   className="object-contain rounded-full"
                   onError={(e) => {
-                    (e.target as HTMLElement).closest('.w-12')?.classList.add('hidden')
+                    (e.target as HTMLElement).closest('.w-14')?.classList.add('hidden')
                   }}
                 />
               </div>
@@ -203,16 +203,18 @@ function AnimatedTimeline() {
                 {achievement.year}
               </span>
               
-              <h4 className="font-orbitron font-bold text-lg text-white mb-3 leading-tight pr-14">
+              <h4 className="font-orbitron font-bold text-lg sm:text-xl text-white mb-3 leading-tight pr-16">
                 {achievement.title}
               </h4>
               
-                  <div className="flex items-center space-x-2 mb-3">
-                    <div className="w-1.5 h-1.5 bg-cyan-400/60 rounded-full"></div>
-                    <p className="text-cyan-400 font-mono text-sm font-medium">
-                      {achievement.company}
-                    </p>
-                  </div>              <p className="text-gray-300 font-mono text-sm leading-relaxed">
+              <div className="flex items-center space-x-2 mb-3">
+                <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                <p className="text-cyan-400 font-mono text-sm sm:text-base font-medium">
+                  {achievement.company}
+                </p>
+              </div>
+              
+              <p className="text-gray-300 font-mono text-sm sm:text-base leading-relaxed">
                 {achievement.description}
               </p>
             </div>
@@ -248,7 +250,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-16 md:py-20 lg:py-32 section-padding bg-black"
+      className="py-12 sm:py-16 md:py-20 lg:py-32 section-padding bg-black min-h-screen"
     >
       <div className="container-max">
         <motion.div
@@ -257,7 +259,7 @@ export default function About() {
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="font-orbitron font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4 md:mb-6">
+          <h2 className="font-orbitron font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-4 md:mb-6">
             About <span className="text-cyan-400">Me</span>
           </h2>
           <div className="w-16 sm:w-20 md:w-24 h-1 bg-cyan-400 mx-auto"></div>
@@ -302,28 +304,28 @@ export default function About() {
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="space-y-4 md:space-y-6 text-gray-300 font-mono leading-relaxed">
-              <p className="text-sm sm:text-base md:text-lg">
+            <div className="space-y-4 md:space-y-6 text-gray-300 font-mono leading-relaxed px-2">
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed">
                 As an <strong className="text-cyan-400">IT undergraduate at SLIIT</strong> specializing in Information Technology, 
                 I am a passionate Full-Stack Developer with a growing proficiency in <strong className="text-white">TypeScript</strong>, 
                 alongside a strong foundation in <strong className="text-white">Java</strong>, <strong className="text-white">Python</strong>, 
                 <strong className="text-white">C++</strong>, and the <strong className="text-cyan-400">MERN stack</strong>.
               </p>
               
-              <p className="text-sm sm:text-base">
+              <p className="text-base sm:text-lg leading-relaxed">
                 Currently diving into <strong className="text-cyan-400">cloud computing</strong>, I aim to master the latest advancements 
                 and integrate <strong className="text-white">AI technologies</strong> to elevate my skills to global standards. 
                 My diverse interests span <strong className="text-white">software engineering</strong>, 
                 <strong className="text-white">web and mobile app development</strong>, and <strong className="text-white">cloud solutions</strong>.
               </p>
               
-              <p className="text-sm sm:text-base">
+              <p className="text-base sm:text-lg leading-relaxed">
                 My passion is fueled by hands-on projects like <strong className="text-cyan-400">construction bidding platforms</strong> 
                 and <strong className="text-cyan-400">Android apps</strong>, where I continuously challenge myself to build innovative solutions 
                 that solve real-world problems with cutting-edge technology.
               </p>
               
-              <p className="text-sm sm:text-base">
+              <p className="text-base sm:text-lg leading-relaxed">
                 Beyond coding, I stay updated with <strong className="text-white">cutting-edge trends</strong> and enjoy collaborating 
                 on innovative tech initiatives. I believe in the power of continuous learning and am always eager to explore 
                 new technologies that can make a meaningful impact.
@@ -331,11 +333,11 @@ export default function About() {
             </div>
 
             {/* Skills */}
-            <div>
-              <h3 className="font-orbitron font-bold text-lg md:text-xl text-white mb-3 md:mb-4">
+            <div className="pt-4">
+              <h3 className="font-orbitron font-bold text-lg sm:text-xl md:text-2xl text-white mb-4 md:mb-6">
                 Core Technologies
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 {skills.map((skill, index) => (
                   <motion.span
                     key={skill}
@@ -359,7 +361,7 @@ export default function About() {
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h3 className="font-orbitron font-bold text-xl sm:text-2xl md:text-3xl text-white mb-8 md:mb-12 text-center">
+          <h3 className="font-orbitron font-bold text-lg sm:text-xl md:text-2xl text-white mb-8 md:mb-12 text-center">
             Education
           </h3>
           <AnimatedTimeline />
