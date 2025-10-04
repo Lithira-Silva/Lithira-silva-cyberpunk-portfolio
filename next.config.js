@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Vercel deployment optimization
+  output: 'standalone',
+  
   images: {
     remotePatterns: [
       {
@@ -9,13 +12,8 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    domains: ['via.placeholder.com'],
   },
-  
-  // Configure for network access
-  assetPrefix: process.env.NODE_ENV === 'production' ? undefined : '',
-  
-  // Allow network IP access in development  
-  allowedDevOrigins: ['192.168.1.3:3000', 'localhost:3000'],
   
   // Enable Next.js 15 features for better performance
   experimental: {
@@ -25,7 +23,7 @@ const nextConfig = {
   // Fix workspace root detection
   outputFileTracingRoot: __dirname,
   
-  // Fix cross-origin dev warning
+  // Security and performance headers
   async headers() {
     return [
       {
@@ -36,16 +34,16 @@ const nextConfig = {
             value: 'DENY',
           },
           {
-            key: 'Access-Control-Allow-Origin',
-            value: '*',
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
           },
           {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, PUT, DELETE, OPTIONS',
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
           },
           {
-            key: 'Access-Control-Allow-Headers',
-            value: 'Content-Type, Authorization',
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
@@ -55,6 +53,9 @@ const nextConfig = {
   // Next.js 15 optimizations
   reactStrictMode: true,
   poweredByHeader: false,
+  
+  // Vercel specific optimizations
+  compress: true,
 }
 
 module.exports = nextConfig
