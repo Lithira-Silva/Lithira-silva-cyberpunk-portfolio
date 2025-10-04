@@ -10,7 +10,7 @@ import FloatingResumeButton from '@/components/FloatingResumeButton'
 
 export default function Home() {
   return (
-    <main id="main-content" className="bg-black text-white">
+    <main id="main-content" className="text-white bg-black">
       <Header />
       <FloatingResumeButton />
       <Hero />

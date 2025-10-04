@@ -10,11 +10,20 @@ const nextConfig = {
       },
     ],
   },
+  
+  // Configure for network access
+  assetPrefix: process.env.NODE_ENV === 'production' ? undefined : '',
+  
+  // Allow network IP access in development  
+  allowedDevOrigins: ['192.168.1.3:3000', 'localhost:3000'],
+  
+  // Enable Next.js 15 features for better performance
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
+  },
+  
   // Fix workspace root detection
   outputFileTracingRoot: __dirname,
-  
-  // Allow cross-origin requests from network IP during development
-  allowedDevOrigins: ['192.168.1.5:3000'],
   
   // Fix cross-origin dev warning
   async headers() {
@@ -26,6 +35,18 @@ const nextConfig = {
             key: 'X-Frame-Options',
             value: 'DENY',
           },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, OPTIONS',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type, Authorization',
+          },
         ],
       },
     ]
@@ -34,11 +55,6 @@ const nextConfig = {
   // Next.js 15 optimizations
   reactStrictMode: true,
   poweredByHeader: false,
-  
-  // Enable new Next.js 15 features for better performance
-  experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
-  },
 }
 
 module.exports = nextConfig
